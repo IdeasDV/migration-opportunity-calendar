@@ -1,0 +1,88 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Submit an opportunity — Migration Opportunity Calendar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A curated public calendar of active migration-related opportunities.">
+<style>
+:root {
+  --bg: #fbfaf7; --card: #ffffff; --ink: #1f2933; --muted: #65707d;
+  --line: #e7e2d9; --accent: #7a4e2d; --accent-soft: #f3eadf;
+  --green-soft: #edf7ef; --blue-soft: #eef4ff; --shadow: 0 8px 24px rgba(31,41,51,0.08);
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; }
+header { padding: 44px 28px 30px; background: linear-gradient(135deg, #fffaf1 0%, #f6efe6 60%, #efe1d2 100%); border-bottom: 1px solid var(--line); }
+.wrap { max-width: 1180px; margin: 0 auto; }
+.kicker { text-transform: uppercase; letter-spacing: .12em; font-size: 12px; color: var(--accent); font-weight: 700; }
+h1 { margin: 10px 0 12px; font-size: clamp(30px, 4vw, 54px); line-height: 1.05; }
+.subtitle { max-width: 820px; color: var(--muted); font-size: 18px; }
+.notice { margin-top: 22px; padding: 14px 16px; background: rgba(255,255,255,.7); border: 1px solid var(--line); border-radius: 14px; color: #4b5563; max-width: 900px; }
+.stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+.stat { background: rgba(255,255,255,.78); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.stat .num { font-size: 26px; font-weight: 800; }
+.stat .label { color: var(--muted); font-size: 13px; }
+main { padding: 26px 28px 50px; }
+.controls { position: sticky; top: 0; z-index: 5; background: rgba(251,250,247,.95); backdrop-filter: blur(8px); padding: 18px 0; border-bottom: 1px solid var(--line); }
+.control-grid { display: grid; grid-template-columns: 1.4fr 1fr .8fr .8fr; gap: 12px; }
+input, select { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--ink); font-size: 14px; }
+.result-meta { margin: 18px 0; color: var(--muted); font-size: 14px; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); }
+.badges { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; }
+.badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; background: var(--accent-soft); color: #68411f; font-weight: 700; }
+.badge.deadline { background: var(--green-soft); color: #276738; }
+.badge.geo { background: var(--blue-soft); color: #284f89; }
+.card h2 { font-size: 19px; margin: 8px 0 8px; line-height: 1.25; }
+.provider { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+.summary { color: #38424d; font-size: 14px; margin: 0 0 14px; }
+.card a { display: inline-block; color: white; background: var(--accent); text-decoration: none; padding: 9px 12px; border-radius: 10px; font-weight: 700; font-size: 14px; }
+.empty { background: white; border: 1px dashed var(--line); border-radius: 16px; padding: 30px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 24px 28px 40px; color: var(--muted); font-size: 13px; }
+@media (max-width: 900px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .control-grid { grid-template-columns: 1fr; } .cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <main>
+    <section class="submit-page-header">
+      <p><a href="./index.html">← Back to calendar</a></p>
+      <h1>Submit an opportunity for review</h1>
+      <p>Suggest a migration-related funding call, job, fellowship, consultation, training, conference or civil-society opportunity. Submissions are reviewed before they appear publicly.</p>
+    </section>
+
+    <section class="submit-form-section" aria-label="Submit an opportunity form">
+      <form name="opportunity-submission" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:grid;gap:12px;max-width:820px;">
+        <input type="hidden" name="form-name" value="opportunity-submission">
+        <p style="display:none;">
+          <label>Do not fill this out: <input name="bot-field"></label>
+        </p>
+
+        <label>Your name or organisation
+          <input name="submitter_name" type="text" style="margin-top:5px;width:100%;padding:12px;border:1px solid #e7e2d9;border-radius:10px;">
+        </label>
+
+        <label>Email
+          <input name="email" type="email" style="margin-top:5px;width:100%;padding:12px;border:1px solid #e7e2d9;border-radius:10px;">
+        </label>
+
+        <label>Opportunity title
+          <input name="opportunity_title" type="text" required style="margin-top:5px;width:100%;padding:12px;border:1px solid #e7e2d9;border-radius:10px;">
+        </label>
+
+        <label>Source URL
+          <input name="source_url" type="url" required style="margin-top:5px;width:100%;padding:12px;border:1px solid #e7e2d9;border-radius:10px;">
+        </label>
+
+        <label>Why is it relevant?
+          <textarea name="relevance_note" rows="4" style="margin-top:5px;width:100%;padding:12px;border:1px solid #e7e2d9;border-radius:10px;"></textarea>
+        </label>
+
+        <button type="submit" style="width:max-content;background:#7a4e2d;color:white;border:0;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer;">
+          Submit for review
+        </button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
