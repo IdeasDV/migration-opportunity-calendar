@@ -754,5 +754,47 @@
         "summary":  "Refugee Rights is recruiting for this role (International Refugee Assistance Project - U.S. Litigation Staff Attorney/ Senior Staff Attorney) The opportunity is treated as Rolling / open until filled under the live Lever job policy Application/source link: https://jobs.eu.lever.co/refugeerights/ca934353-b0f3-4be3-873d-b5f02ee7f0d7",
         "status":  "",
         "source_url":  "https://jobs.eu.lever.co/refugeerights/ca934353-b0f3-4be3-873d-b5f02ee7f0d7"
+    },
+    {
+        "id":  "MOC-0078",
+        "title":  "Global Forum on Migration and Development | Migrant Forum in Asia",
+        "provider":  "Migration Forum Asia",
+        "opportunity_type":  "funding/grant",
+        "deadline":  "18 December 2025",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "Asia",
+        "source_language":  "auto-detected",
+        "summary":  "Verified opportunity from Migration Forum Asia. Source evidence indicates relevance to migration/refugees/diaspora or adjacent human-rights/inclusion work. See source page for full eligibility and application details.",
+        "status":  "active",
+        "source_url":  "https://mfasia.org/mfa_programs/advocacy/global-forum-on-migration-and-development"
+    },
+    {
+        "id":  "MOC-0079",
+        "title":  "Appeal No. 2: Urgent Justice Mechanism for Repatriated Migrant Workers Now | Migrant Forum in Asia",
+        "provider":  "Migration Forum Asia",
+        "opportunity_type":  "job",
+        "deadline":  "1 June 2020",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "Asia",
+        "source_language":  "auto-detected",
+        "summary":  "Verified opportunity from Migration Forum Asia. Source evidence indicates relevance to migration/refugees/diaspora or adjacent human-rights/inclusion work. See source page for full eligibility and application details.",
+        "status":  "active",
+        "source_url":  "https://mfasia.org/appeal-no-2-urgent-justice-mechanism-for-repatriated-migrant-workers-now"
+    },
+    {
+        "id":  "MOC-0080",
+        "title":  "Internships | Migrant Forum in Asia",
+        "provider":  "Migration Forum Asia",
+        "opportunity_type":  "funding/grant",
+        "deadline":  "18 December 2025",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "Asia",
+        "source_language":  "auto-detected",
+        "summary":  "Verified opportunity from Migration Forum Asia. Source evidence indicates relevance to migration/refugees/diaspora or adjacent human-rights/inclusion work. See source page for full eligibility and application details.",
+        "status":  "active",
+        "source_url":  "https://mfasia.org/get-involved/mfa-internships"
     }
 ]
