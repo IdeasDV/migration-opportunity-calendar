@@ -1,47 +1,1409 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Migration Opportunity Calendar</title>
 <style>
-:root{--bg:#f6efe6;--panel:#fff;--ink:#1f2933;--muted:#607083;--line:#e6ded4;--accent:#8a4b1f;--chip:#fffaf3;--shadow:0 10px 30px rgba(31,41,51,.08);--radius:18px}
-*{box-sizing:border-box}body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--bg),#fbfaf8 50%,#fff)}
-header{padding:28px 24px 30px;border-bottom:1px solid var(--line)}.wrap{max-width:1160px;margin:0 auto}.kicker{color:var(--accent);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
-h1{margin:0;font-size:clamp(34px,5vw,54px);line-height:1.02;letter-spacing:-.045em}.subtitle{margin:20px 0 0;max-width:980px;color:var(--muted);font-size:18px;line-height:1.55}
-.notice{margin-top:24px;padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.75);color:#5f6f82;line-height:1.55}
-.stats{display:grid;grid-template-columns:repeat(5,minmax(140px,1fr));gap:14px;margin-top:26px}.stat{background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(31,41,51,.04)}.stat strong{display:block;font-size:30px}.stat span{color:var(--muted);font-size:13px}
-.controls{position:sticky;top:0;z-index:2;background:rgba(251,250,248,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:18px 24px}.control-grid{display:grid;grid-template-columns:minmax(240px,1.5fr) minmax(180px,.9fr) minmax(180px,.9fr) minmax(170px,.8fr);gap:12px}
-input,select{width:100%;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:13px 14px;font-size:15px;outline:none}
-main{padding:36px 24px 56px}.about{border:1px solid #dfe6ee;border-radius:var(--radius);padding:22px 24px;background:#fff;box-shadow:var(--shadow);margin-bottom:24px}.about h2{margin:0 0 10px;font-size:21px}.about p{color:#536275;line-height:1.55;margin:10px 0}
-.results-note{color:var(--muted);font-size:14px;margin:20px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{background:var(--panel);border:1px solid #e2e8f0;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;min-height:220px;display:flex;flex-direction:column;gap:12px}.card h3{margin:0;font-size:20px;line-height:1.25}.provider{color:var(--accent);font-weight:700;font-size:14px}.summary{color:#516174;line-height:1.5;margin:0}.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}.pill{border:1px solid var(--line);background:var(--chip);color:#526273;border-radius:999px;padding:7px 10px;font-size:13px;line-height:1}.apply{margin-top:4px;color:#0f4c81;font-weight:700;text-decoration:none}.apply:hover{text-decoration:underline}.empty{padding:30px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--muted);background:#fff}
-footer{padding:28px 24px 46px;color:var(--muted);border-top:1px solid var(--line);font-size:13px}@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(140px,1fr))}.control-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+:root {
+  --bg: #f7f1e8;
+  --panel: #fffdf8;
+  --text: #2d2924;
+  --muted: #73685e;
+  --line: #e3d4c2;
+  --accent: #2f6656;
+  --accent-soft: #e8f1ec;
+  --warn: #8b5a35;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  padding: 34px 18px 30px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, #f5ecdf, #f8f3eb);
+}
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.02;
+}
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+.controls {
+  display: grid;
+  grid-template-columns: minmax(260px, 2fr) repeat(4, minmax(170px, 1fr));
+  gap: 14px;
+  padding: 22px 18px;
+  border-bottom: 1px solid var(--line);
+}
+input, select {
+  width: 100%;
+  padding: 14px 15px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--text);
+  font-size: 16px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 18px;
+  padding: 26px 18px 10px;
+}
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px 20px;
+}
+.num {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--warn);
+  line-height: 1;
+}
+.label {
+  font-size: 16px;
+  color: var(--muted);
+}
+.meta {
+  padding: 16px 18px 8px;
+  color: var(--muted);
+  font-size: 18px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 14px 18px 40px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 24px 22px;
+  box-shadow: 0 2px 12px rgba(63, 45, 28, 0.04);
+}
+.card h2 {
+  margin: 0 0 14px;
+  font-size: 23px;
+  line-height: 1.08;
+}
+.source {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 14px;
+}
+.tag {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: #fff;
+  color: #65594d;
+  font-size: 14px;
+}
+.tag.deadline-closing { background: var(--accent-soft); color: var(--accent); border-color: #c7ddcf; }
+.tag.deadline-archive { background: #f3e5db; color: #86533d; }
+.idline {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 10px 0;
+}
+.summary {
+  border-top: 1px solid var(--line);
+  margin-top: 14px;
+  padding-top: 14px;
+  color: #4a433b;
+  line-height: 1.35;
+  max-height: 120px;
+  overflow: auto;
+}
+.card a {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+.empty {
+  padding: 40px 18px;
+  color: var(--muted);
+  font-size: 20px;
+}
+@media (max-width: 1200px) {
+  .cards { grid-template-columns: repeat(3, minmax(240px, 1fr)); }
+  .controls { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .cards { grid-template-columns: 1fr; }
+  .controls { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
-<header><div class="wrap"><div class="kicker">Beta public preview</div><h1>Migration Opportunity Calendar</h1><p class="subtitle">A curated calendar of active migration-related opportunities: funding, academic positions, fellowships, consultations, trainings, conferences and civil-society calls.</p><div class="notice">This preview shows only active or rolling public-safe records. Expired, draft, hold, rejected or incomplete records are kept out of the public page.</div>
-<section class="stats" aria-label="Calendar statistics"><div class="stat"><strong id="stat-total">–</strong><span>active / rolling records</span></div><div class="stat"><strong id="stat-closing">–</strong><span>closing within 60 days</span></div><div class="stat"><strong id="stat-funding">–</strong><span>funding / grants</span></div><div class="stat"><strong id="stat-academic">–</strong><span>academic / research</span></div><div class="stat"><strong id="stat-jobs">–</strong><span>jobs / internships</span></div></section></div></header>
-<section class="controls"><div class="wrap control-grid"><input id="search" type="search" placeholder="Search title, provider, summary, geography"><select id="typeFilter"><option value="">All opportunity types</option></select><select id="deadlineFilter"><option value="">All active/rolling deadlines</option><option value="closing60">Closing within 60 days</option><option value="rolling">Rolling / open deadline</option></select><select id="sortBy"><option value="deadline">Sort by deadline</option><option value="title">Sort by title</option><option value="provider">Sort by provider</option></select></div></section>
-<main><div class="wrap"><section class="about"><h2>A verified, migration-specific calendar</h2><p>This public page shows only active or rolling records that pass basic checks on source, deadline and relevance. Older, incomplete, uncertain or draft records are kept out of the public view.</p><p>Coverage is expanding across academic opportunities, civil-society and NGO funding, institutional calls, research roles, consultations, training and migration-related professional opportunities.</p></section><div id="resultsNote" class="results-note">Loading opportunities…</div><section id="cards" class="grid" aria-live="polite"></section></div></main>
-<footer><div class="wrap">Generated from live public data. Last rebuilt: 
-2026-06-16 17:18
-. Data source: <code>opportunities.json</code>.</div></footer>
+<header>
+  <h1>Migration Opportunity Calendar</h1>
+  <p class="subtitle">Curated migration-related opportunities, clear filters, and readable cards.</p>
+</header>
+
+<section class="controls">
+  <input id="search" placeholder="Search..." aria-label="Search opportunities">
+  <select id="typeFilter" aria-label="Filter by type"></select>
+  <select id="audienceFilter" aria-label="Filter by audience"></select>
+  <select id="locationFilter" aria-label="Filter by location">
+    <option value="">All locations</option>
+    <option>Global</option>
+    <option>Africa</option>
+    <option>Americas</option>
+    <option>Asia</option>
+    <option>Europe</option>
+    <option>Oceania</option>
+    <option>Multiple regions</option>
+  </select>
+  <select id="deadlineFilter" aria-label="Filter by deadline">
+    <option value="">Current opportunities</option>
+    <option>Closing soon</option>
+    <option>Open / mixed</option>
+    <option>Rolling / open</option>
+    <option>No date listed</option>
+    <option>Archive</option>
+  </select>
+</section>
+
+<section class="stats">
+  <div class="stat"><div class="num" id="openCount">0</div><div class="label">current opportunities</div></div>
+  <div class="stat"><div class="num" id="closingSoonCount">0</div><div class="label">closing soon</div></div>
+</section>
+
+<div class="meta" id="resultMeta"></div>
+<section class="cards" id="cards"></section>
+
 <script>
-let opportunities=[];
-const fields={title:["title","translated_title_en","original_title","opportunity_title","name"],provider:["provider","organisation","organization","source_name"],type:["opportunity_type","type","category"],deadline:["deadline","deadline_display","application_deadline","deadline_raw"],geography:["geography","location","country","region"],summary:["summary","translated_summary_en","description","original_excerpt"],url:["source_url","application_url","url","link","job_url","candidate_url"]};
-function get(row,key){for(const name of fields[key]||[key]){if(row&&row[name]!==undefined&&row[name]!==null&&String(row[name]).trim()!=="")return String(row[name]).trim()}return ""}
-function esc(v){return String(v||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\"","&quot;")}
-function parseDeadline(v){const t=String(v||"").trim();if(!t||/rolling|open|ongoing|until filled|various|n\/a/i.test(t))return null;const iso=t.match(/\b(20\d{2})-(\d{2})-(\d{2})\b/);if(iso)return new Date(`${iso[1]}-${iso[2]}-${iso[3]}T00:00:00`);const dmy=t.match(/\b(\d{1,2})[\/\.-](\d{1,2})[\/\.-](20\d{2})\b/);if(dmy)return new Date(`${dmy[3]}-${String(dmy[2]).padStart(2,"0")}-${String(dmy[1]).padStart(2,"0")}T00:00:00`);const d=new Date(t);return Number.isNaN(d.getTime())?null:d}
-function daysUntil(d){if(!d)return null;const a=new Date();a.setHours(0,0,0,0);const b=new Date(d);b.setHours(0,0,0,0);return Math.round((b-a)/86400000)}
-function typeText(r){return get(r,"type")||"opportunity"}
-function closing(r,n){const d=parseDeadline(get(r,"deadline"));const x=daysUntil(d);return x!==null&&x>=0&&x<=n}
-function rolling(r){const d=get(r,"deadline");return !parseDeadline(d)||/rolling|open|ongoing|until filled/i.test(d)}
-function stats(data){document.getElementById("stat-total").textContent=data.length;document.getElementById("stat-closing").textContent=data.filter(r=>closing(r,60)).length;document.getElementById("stat-funding").textContent=data.filter(r=>/fund|grant|award|fellowship|scholar/i.test(typeText(r)+" "+get(r,"title"))).length;document.getElementById("stat-academic").textContent=data.filter(r=>/academic|research|phd|postdoc|fellowship|school|conference|training/i.test(typeText(r)+" "+get(r,"title"))).length;document.getElementById("stat-jobs").textContent=data.filter(r=>/job|intern|consult|officer|manager|director|coordinator|assistant|advisor/i.test(typeText(r)+" "+get(r,"title"))).length}
-function typeFilter(data){const s=document.getElementById("typeFilter");const types=[...new Set(data.map(typeText).filter(Boolean))].sort((a,b)=>a.localeCompare(b));s.innerHTML="<option value=\"\">All opportunity types</option>"+types.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join("")}
-function filtered(){const q=document.getElementById("search").value.trim().toLowerCase();const type=document.getElementById("typeFilter").value;const deadline=document.getElementById("deadlineFilter").value;const sort=document.getElementById("sortBy").value;let rows=opportunities.filter(r=>{const hay=[get(r,"title"),get(r,"provider"),typeText(r),get(r,"deadline"),get(r,"geography"),get(r,"summary")].join(" ").toLowerCase();if(q&&!hay.includes(q))return false;if(type&&typeText(r)!==type)return false;if(deadline==="closing60"&&!closing(r,60))return false;if(deadline==="rolling"&&!rolling(r))return false;return true});rows.sort((a,b)=>{if(sort==="title")return get(a,"title").localeCompare(get(b,"title"));if(sort==="provider")return get(a,"provider").localeCompare(get(b,"provider"));const da=parseDeadline(get(a,"deadline"));const db=parseDeadline(get(b,"deadline"));if(da&&db)return da-db;if(da&&!db)return -1;if(!da&&db)return 1;return get(a,"title").localeCompare(get(b,"title"))});return rows}
-function render(){const rows=filtered();document.getElementById("resultsNote").textContent=`${rows.length} results shown out of ${opportunities.length} active/rolling records.`;const cards=document.getElementById("cards");if(!rows.length){cards.innerHTML="<div class=\"empty\">No opportunities match the current filters.</div>";return}cards.innerHTML=rows.map(r=>{const title=get(r,"title")||"Untitled opportunity";const provider=get(r,"provider")||"Unknown provider";const deadline=get(r,"deadline")||"Rolling / open";const geo=get(r,"geography")||"Various / not specified";const type=typeText(r);const summary=get(r,"summary");const url=get(r,"url");return `<article class="card"><div class="provider">${esc(provider)}</div><h3>${esc(title)}</h3>${summary?`<p class="summary">${esc(summary)}</p>`:""}<div class="meta"><span class="pill">${esc(type)}</span><span class="pill">${esc(deadline)}</span><span class="pill">${esc(geo)}</span></div>${url?`<a class="apply" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open source / apply →</a>`:""}</article>`}).join("")}
-async function load(){try{const r=await fetch(`opportunities.json?cb=${Date.now()}`,{cache:"no-store"});if(!r.ok)throw new Error(`HTTP ${r.status}`);const data=await r.json();opportunities=Array.isArray(data)?data:(data.opportunities||data.data||[])}catch(e){document.getElementById("resultsNote").textContent="Could not load opportunities.json.";opportunities=[]}typeFilter(opportunities);stats(opportunities);render()}
-["search","typeFilter","deadlineFilter","sortBy"].forEach(id=>{document.getElementById(id).addEventListener("input",render);document.getElementById(id).addEventListener("change",render)});load();
+const DATA = [
+    {
+        "id":  "MOC-0001",
+        "title":  "Visiting Research Fellowship for a prospective PhD student in Migration Studies with a focus on informal work",
+        "source":  "University for Continuing Education Krems",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.donau-uni.ac.at/en/university/faculties/business-globalization/departments/migration-globalization/news-events/news/2026/vrfs_26.html",
+        "summary":  "Short-term visiting research fellowship at the University for Continuing Education Krems for a prospective PhD student developing a proposal on informal work and migration in Europe. The fellowship supports preparation of a DOC funding application, with guidance from migration scholars and possible support for physical presence in Krems.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0002",
+        "title":  "Early-Stage Researcher / PhD student in Migration Studies — ERC project on Brazil and Spain regularisation policies",
+        "source":  "IMISCOE Jobs \u0026 Opportunities / University for Continuing Education Krems",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.imiscoe.org/news-and-blog/jobs-opportunities/2658-early-stage-researcher-phd-student-m-f-d-erc-brazil-spain-regularisation-policies",
+        "summary":  "Fully funded PhD / early-stage researcher position at the University for Continuing Education Krems within an ERC project on ethical dilemmas of migrant solidarity. The researcher will work on national migration policies in Brazil and Spain, using qualitative research and contributing to a cumulative PhD dissertation.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0003",
+        "title":  "Postdoctoral Researcher in Migration Studies — ERC Consolidator Grant, US and Latin America",
+        "source":  "IMISCOE Jobs \u0026 Opportunities / University for Continuing Education Krems",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "North America",
+        "deadline_group":  "Later",
+        "url":  "https://www.imiscoe.org/news-and-blog/jobs-opportunities/2659-postdoctoral-researcher-in-migration-studies-m-f-d-erc-consolidator-grant-us-latin-america",
+        "summary":  "Three-year postdoctoral researcher position at the University for Continuing Education Krems within an ERC project on ethical dilemmas of migrant solidarity. The postdoc will lead a work package on sanctuary/solidarity cities in the United States and Latin America, using qualitative fieldwork and contributing to theory-building on migration governance and solidarity.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0004",
+        "title":  "26th Sanremo Summer School",
+        "source":  "International Institute of Humanitarian Law",
+        "type":  "Training \u0026 events",
+        "audience":  "Open / mixed",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://iihl.org/portfolio-item/26th-sanremo-summer-school/",
+        "summary":  "Two-week in-person summer school in Sanremo organised by the International Institute of Humanitarian Law. It is relevant for people working on protection, humanitarian law, human rights and related fields. The course is in English and provides an official certificate.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0005",
+        "title":  "Summer School on Migration and Human Rights",
+        "source":  "UNICRI / John Cabot University",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Europe",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://unicri.org/Training-specialized-course-migration-and-human-rights-2026",
+        "summary":  "One-week in-person summer school in Rome on migration and human rights, organised by UNICRI and John Cabot University. It covers legal, policy, social and technological dimensions of migration governance, including asylum law, migrant protection, trafficking, AI and digital border management, algorithmic decision-making, disinformation and public narratives on migration.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0006",
+        "title":  "HORIZON-CL2-2026-01-TRANSFO-08 — Strengthened implementation of the EU Pact on Migration and Asylum and a focus on inclusion, integration, and health",
+        "source":  "EU Funding \u0026 Tenders Portal",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Europe",
+        "deadline_group":  "Later",
+        "url":  "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals?callIdentifier=HORIZON-CL2-2026-01",
+        "summary":  "Horizon Europe research funding topic on the implementation of the EU Pact on Migration and Asylum, with a focus on evidence-based migration governance, asylum management, age assessment of minors, resettlement, legal pathways, migrant and refugee health data, and long-term social inclusion and integration strategies.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0007",
+        "title":  "Luxembourg subsidies for intercultural projects supporting third-country national integration",
+        "source":  "European Commission / Luxembourg Ministry of Family, Solidarity, Living Together and Hospitality",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Europe",
+        "deadline_group":  "Later",
+        "url":  "https://home-affairs.ec.europa.eu/news/luxembourg-combats-racism-against-and-poverty-among-migrants-2026-03-26_en",
+        "summary":  "Luxembourg funding scheme for non-profit organisations, foundations and social impact entities developing projects that support intercultural living together, anti-racism, equal opportunities and the integration of third-country nationals. Applications can be submitted during the year, with a key deadline on 8 October 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0009",
+        "title":  "Socio-labour inclusion and empowerment of migrant women: 2026 public calls",
+        "source":  "Ministero del Lavoro e delle Politiche Sociali",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.lavoro.gov.it/notizie/pagine/inclusione-socio-lavorativa-ed-empowerment-delle-donne-migranti",
+        "summary":  "Italian public funding calls for projects supporting the socio-labour inclusion and empowerment of migrant women. The calls cover women victims of trafficking, serious labour exploitation and gender-based violence, qualification of domestic and care work, and inclusion of migrant women who are unemployed, inactive or in precarious employment.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0010",
+        "title":  "Call for input: Children\u0027s right to family life in the context of migration and asylum policies",
+        "source":  "OHCHR / Special Rapporteur on the human rights of migrants",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.ohchr.org/en/calls-for-input/2026/call-input-childrens-right-family-life-context-migration-and-asylum-policies",
+        "summary":  "OHCHR call for inputs by the Special Rapporteur on the human rights of migrants on children\u0027s right to family life in the context of migration and asylum policies. It is relevant for organisations, researchers and practitioners with evidence on family separation, child protection, asylum procedures, migration enforcement and children\u0027s rights.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0011",
+        "title":  "Assistant Professor — Centre of Migration Research, University of Warsaw",
+        "source":  "Centre of Migration Research, University of Warsaw",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Europe",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.migracje.uw.edu.pl/job-offers/",
+        "summary":  "Assistant Professor position at the Centre of Migration Research, University of Warsaw. This is a faculty-rank academic job in a dedicated migration research centre, making it highly relevant for researchers seeking positions beyond the postdoc/fellowship stage.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0013",
+        "title":  "Call for Proposals - Migration Partnerships",
+        "source":  "Migration Partnership Facility / ICMPD",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Europe",
+        "deadline_group":  "Rolling / open",
+        "url":  "https://www.migrationpartnershipfacility.eu/calls-for-proposals/cfp-migration-partnerships",
+        "summary":  "Rolling / open call under the Migration Partnership Facility supporting EU migration priorities with partner countries and projects aligned with EU Talent Partnerships. It can fund migration governance, legal/labour mobility, migrant protection, asylum policy, reintegration, diaspora-related activities and capacity-building. It is highly relevant but administratively complex and not designed for small informal organisations.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0014",
+        "title":  "Community Connection Grant",
+        "source":  "Hume City Council",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.hume.vic.gov.au/Your-Council/Grants-awards-and-funds/Community-Grants-Program",
+        "summary":  "Small local community grant from Hume City Council supporting activities that improve access, inclusion, equity, participation, community connection, health and wellbeing. It is not migration-specific, but it is relevant for migrant-led, multicultural or refugee-supporting community groups in Hume if their project benefits local residents and fits the inclusion/community connection objectives.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0016",
+        "title":  "Migration Policy Institute Fall 2026 Research Internship",
+        "source":  "Migration Policy Institute",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Remote / hybrid",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.migrationpolicy.org/about/intern",
+        "summary":  "Fall 2026 paid research internship at the Migration Policy Institute. Research interns can work across MPI programme areas including U.S. immigration, international migration, immigrant integration, Latin America and Caribbean migration, and refugee/forced displacement. This is a strong entry-level migration-sector opportunity for students, graduates and early-career professionals interested in policy research.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0017",
+        "title":  "IMISCOE Spring Conference 2027 — Call for Papers",
+        "source":  "IMISCOE / Global Migration Institute, Toronto Metropolitan University",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.imiscoe.org/news-and-blog/news/network-news/2650-applications-for-the-2027-imiscoe-spring-conference-in-toronto",
+        "summary":  "Call for Papers for the 2027 IMISCOE Spring Conference in Toronto, hosted by the Global Migration Institute at Toronto Metropolitan University. The conference focuses on digital transformations in migration governance and migration research, including AI, biometric systems, digital borders, migrant rights, research ethics and participatory/community-based approaches.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0019",
+        "title":  "RUNOMI PhD Autumn School 2026",
+        "source":  "Radboud University / RUNOMI",
+        "type":  "Academic \u0026 research",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.ru.nl/en/about-us/events/runomi-phd-autumn-school-2026",
+        "summary":  "Three-day autumn school for PhD candidates working on migration and health. It addresses methodological, ethical and empirical dilemmas in research and healthcare, and is hosted by RUNOMI at Radboud University and Radboudumc in Nijmegen.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0021",
+        "title":  "Making Europe a global magnet for talent - Attracting and retaining students, researchers and high-skilled workers from outside the EU",
+        "source":  "European Commission — Horizon Europe Cluster 2",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "Later",
+        "url":  "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals?callIdentifier=HORIZON-CL2-2026-01\u0026frameworkProgramme=43108390\u0026isExactMatch=true\u0026order=DESC\u0026pageNumber=1\u0026pageSize=50\u0026sortBy=startDate\u0026status=31094501%2C31094502%2C31094503",
+        "summary":  "Horizon Europe research funding topic on attracting and retaining students, researchers and high-skilled workers from outside the EU. The topic is strongly migration-relevant but primarily suited to research consortia rather than small organisations applying alone.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0031",
+        "title":  "Proteus Fund / RISE Together — 2026 Small Grants Fund",
+        "source":  "Proteus Fund / RISE Together Fund",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Europe",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.proteusfund.org/rtf-small-grants-fund/",
+        "summary":  "Proteus Fund / RISE Together Fund is offering a 2026 Small Grants Fund. The opportunity is relevant to civil society organisations and initiatives working on rights, inclusion, social justice, and affected communities, with a listed deadline of 15 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0034",
+        "title":  "IOM — Consultant, Legal Identity and Civil Registration Toolbox",
+        "source":  "IOM official career site / Impactpool",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://iom.impactpool.org/vacancies/1198525",
+        "summary":  "IOM is advertising a consultancy related to legal identity and civil registration tools. The opportunity is relevant to migration governance, legal identity, civil registration, protection, and technical support for policy and programming, with a listed deadline of 15 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0043",
+        "title":  "OHCHR — Reconstruction and Internally Displaced Persons",
+        "source":  "OHCHR / Special Rapporteur on the human rights of internally displaced persons",
+        "type":  "Consultations \u0026 participation",
+        "audience":  "Open / mixed",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.ohchr.org/en/calls-for-input/2026/call-inputs-report-reconstruction-and-internally-displaced-persons-conflict",
+        "summary":  "OHCHR is inviting inputs for a report on reconstruction and internally displaced persons in conflict and post-conflict contexts. The call is relevant to displacement, protection, human rights, and policy evidence, with a listed deadline of 15 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0028",
+        "title":  "FCDO — Uganda Refugee Support, Empowerment and Transformation ReSET Project",
+        "source":  "Foreign, Commonwealth \u0026 Development Office / British High Commission Kampala",
+        "type":  "Funding \u0026 grants",
+        "audience":  "NGOs \u0026 civil society",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.gov.uk/international-development-funding/uganda-refugee-support-empowerment-and-transformation-reset-project-call-for-proposals",
+        "summary":  "The UK Foreign, Commonwealth and Development Office is advertising the Uganda Refugee Support, Empowerment and Transformation project. The opportunity is relevant to refugee support, protection, livelihoods, and humanitarian-development programming in Uganda, with a listed deadline of 16 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0026",
+        "title":  "ICMPD — Internship, Research Unit",
+        "source":  "International Centre for Migration Policy Development",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.icmpd.org/work-with-us/internships",
+        "summary":  "ICMPD is advertising an internship in its Research Unit. The opportunity is relevant to early-career candidates interested in migration policy, research support, European migration governance, and applied migration analysis, with a listed deadline of 17 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0035",
+        "title":  "IOM — Case Manager, Assisted Voluntary Return",
+        "source":  "IOM career site / Impactpool",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://iom.impactpool.org/vacancies/1217909",
+        "summary":  "IOM is advertising a case manager role connected to Assisted Voluntary Return. The opportunity is relevant to migration casework, return and reintegration support, migrant assistance, and operational migration programming, with a listed deadline of 18 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0027",
+        "title":  "ICMPD ENHANCER PRO — Start-Up Grant Scheme Türkiye",
+        "source":  "ICMPD / ENHANCER PRO",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Open / mixed",
+        "region":  "Europe",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.icmpd.org/work-with-us/grants/calls-for-proposals",
+        "summary":  "ICMPD / ENHANCER PRO is offering a start-up grant scheme in Türkiye. The opportunity is relevant to entrepreneurship, livelihoods, economic inclusion, and support for communities affected by displacement and migration, with a listed deadline of 19 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0025",
+        "title":  "Oxford Refugee Studies Centre — International Online School in Forced Migration, June 2026",
+        "source":  "Refugee Studies Centre, University of Oxford",
+        "type":  "Academic \u0026 research",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.rsc.ox.ac.uk/study/international-summer-school/apply",
+        "summary":  "The Refugee Studies Centre at the University of Oxford is offering an International Online School in Forced Migration. The programme is relevant to students, practitioners, researchers, and policy actors working on refugees, displacement, protection, and forced migration, with a listed deadline of 22 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0044",
+        "title":  "UNHCR — Nansen Refugee Award 2026 Nominations",
+        "source":  "UNHCR",
+        "type":  "Other opportunities",
+        "audience":  "Open / mixed",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.unhcr.org/about-unhcr/overview/nansen-refugee-award/nominate",
+        "summary":  "UNHCR is inviting nominations for the 2026 Nansen Refugee Award. The opportunity is relevant to individuals, groups, and organisations supporting refugees, displaced people, and stateless people, with a listed deadline of 23 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0024",
+        "title":  "2027 IMISCOE Spring Conference — Studying Migration in the Digital Era",
+        "source":  "IMISCOE / Global Migration Institute at Toronto Metropolitan University",
+        "type":  "Academic \u0026 research",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.imiscoe.org/events/imiscoe-events/2638-2027-imiscoe-spring-conference",
+        "summary":  "IMISCOE and the Global Migration Institute at Toronto Metropolitan University are organising the 2027 IMISCOE Spring Conference on migration in the digital era. The opportunity is relevant to migration researchers working on digitalisation, mobility, governance, and migration studies, with a listed deadline of 26 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0040",
+        "title":  "Portugal 2030 / PESSOAS-2026-7 — Portuguese Language Learning for Foreign Citizens",
+        "source":  "Portugal 2030 / PESSOAS 2030",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://portugal2030.pt/2026/05/20/pessoas-2030-apoia-a-aprendizagem-de-portugues-por-cidadaos-estrangeiros/",
+        "summary":  "Portugal 2030 / PESSOAS 2030 is supporting Portuguese language learning for foreign citizens. The opportunity is relevant to integration, language access, inclusion, and support services for migrants and foreign residents, with a listed deadline of 26 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0042",
+        "title":  "FCDO — Jordan Humanitarian and Systems Strengthening Programme, Protection Component",
+        "source":  "UK Foreign, Commonwealth and Development Office",
+        "type":  "Funding \u0026 grants",
+        "audience":  "NGOs \u0026 civil society",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.gov.uk/international-development-funding/call-for-proposals-jordan-humanitarian-and-systems-strengthening-programme-jhass-protection-component",
+        "summary":  "The UK Foreign, Commonwealth and Development Office is advertising a protection component within the Jordan Humanitarian and Systems Strengthening Programme. The opportunity is relevant to humanitarian protection, forced displacement, refugee response, and systems-strengthening work in Jordan, with a listed deadline of 28 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0046",
+        "title":  "UNHCR — Innovation Accelerator 2026",
+        "source":  "UNHCR Innovation Service",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Open / mixed",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Closing soon",
+        "url":  "https://www.unhcr.org/innovation/accelerator/",
+        "summary":  "The UNHCR Innovation Service is running the 2026 Innovation Accelerator. The opportunity is relevant to innovation, refugee protection, displacement response, community-led solutions, and practical support for forcibly displaced people, with a listed deadline of 12 July 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0041",
+        "title":  "ARUA — Early-Career Research Fellowships, Migration and Mobility",
+        "source":  "African Research Universities Alliance",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Africa",
+        "deadline_group":  "Closing soon",
+        "url":  "https://arua.org/early-career-research-fellowships/",
+        "summary":  "The African Research Universities Alliance is offering early-career research fellowships on migration and mobility. The opportunity is relevant to researchers working on African migration, mobility, development, and regional research collaboration, with a listed deadline of 15 July 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0049",
+        "title":  "African Union ECOSOCC — 5th Permanent General Assembly for African and Diaspora CSOs",
+        "source":  "African Union ECOSOCC",
+        "type":  "Consultations \u0026 participation",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Africa",
+        "deadline_group":  "Closing soon",
+        "url":  "https://ecosocc.au.int/en/elections",
+        "summary":  "African Union ECOSOCC is convening the 5th Permanent General Assembly for African and Diaspora civil society organisations. The opportunity is relevant to diaspora engagement, civil society participation, African governance, and transnational civic networks, with a listed deadline of 15 July 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0053",
+        "title":  "Consultant Type B - Migration Health Nurse",
+        "source":  "IOM official career site / Impactpool",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://iom.impactpool.org/vacancies/1219191",
+        "summary":  "IOM is advertising a Migration Health Nurse consultancy/job opportunity in Tunisia through its official Impactpool careers page. The role is relevant to migration health, service delivery, and operational support for migrant and mobile populations, with a listed deadline of 26 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0054",
+        "title":  "Italy: Call for projects on socio-labour inclusion and empowerment of migrant women",
+        "source":  "Ministero del Lavoro e delle Politiche Sociali",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.interno.gov.it/it/amministrazione-trasparente/bandi-gara-e-contratti/avviso-pubblico-n22026-presentazione-progetti-finalizzati-allinclusione-socio-lavorativa-e-allempowerment-donne-migranti-e-decreto-approvazione-n-58-17-04-2026",
+        "summary":  "Italian public authorities are advertising a call for projects supporting socio-labour inclusion and empowerment of migrant women. The opportunity is relevant to migration, integration, civil society/service providers, and migrant women\u0027s inclusion, with a listed deadline of 2026-06-23.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0055",
+        "title":  "Coordinador general (jefe de misión) (M/H) - Mexico",
+        "source":  "Médecins du Monde",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4214787/coordinador-general-jefe-de-mision-mh-mexico",
+        "summary":  "ReliefWeb lists this job opportunity as relevant to migration, displacement, refugee protection, or humanitarian response. The role is associated with Médecins du Monde, geography: Mexico, with a listed deadline of 2026-06-13.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0056",
+        "title":  "Pharmacien.ne réglementaire (F/H)",
+        "source":  "Médecins Sans Frontières",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4214829/pharmacienne-reglementaire-fh",
+        "summary":  "ReliefWeb lists this job opportunity as relevant to migration, displacement, refugee protection, or humanitarian response. The role is associated with Médecins Sans Frontières, geography: Mexico, with a listed deadline of 2026-06-13.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0057",
+        "title":  "Consultancy for Stakeholder Consultations to Inform a Private Sector Awareness Campaign on TVET in Jordan- Education",
+        "source":  "UN Educational, Scientific and Cultural Organization Type Consultancy Career category Advoc",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Middle East",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4214864/consultancy-stakeholder-consultations-inform-private-sector-awareness-campaign-tvet-jordan-education",
+        "summary":  "ReliefWeb lists this job opportunity as relevant to migration, displacement, refugee protection, or humanitarian response. The role is associated with UN Educational, Scientific and Cultural Organization Type Consultancy Career category Advoc, geography: Jordan, with a listed deadline of 2026-06-14.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0058",
+        "title":  "Finance Coordinator - Syria (National)",
+        "source":  "Geneva Call",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Practitioners",
+        "region":  "Europe",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4214892/finance-coordinator-syria-national",
+        "summary":  "ReliefWeb lists this job opportunity as relevant to migration, displacement, refugee protection, or humanitarian response. The role is associated with Geneva Call, geography: Syria, with a listed deadline of 2026-06-18.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0059",
+        "title":  "Liaison Senior Officer - Syria Damascus",
+        "source":  "GOAL",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Middle East",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4214811/liaison-senior-officer-syria-damascus",
+        "summary":  "ReliefWeb lists this job opportunity as relevant to migration, displacement, refugee protection, or humanitarian response. The role is associated with GOAL, geography: Syria, with a listed deadline of 2026-06-18.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0060",
+        "title":  "OPERATIONS MANAGER",
+        "source":  "Agency for Technical Cooperation and Development",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Practitioners",
+        "region":  "Africa",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4214885/operations-manager",
+        "summary":  "ReliefWeb lists this job opportunity as relevant to migration, displacement, refugee protection, or humanitarian response. The role is associated with Agency for Technical Cooperation and Development, geography: Uganda, with a listed deadline of 2026-06-21.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0061",
+        "title":  "Haïti - WASH Coordinator - Emergency Response Team (M/F)",
+        "source":  "Solidarités International",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Practitioners",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4214894/haiti-wash-coordinator-emergency-response-team-mf",
+        "summary":  "ReliefWeb lists this job opportunity as relevant to migration, displacement, refugee protection, or humanitarian response. The role is associated with Solidarités International, geography: Haiti, with a listed deadline of 2026-07-01.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0062",
+        "title":  "AI Platform Engineer",
+        "source":  "International Rescue Committee",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Global",
+        "deadline_group":  "Later",
+        "url":  "https://reliefweb.int/job/4214925/ai-platform-engineer",
+        "summary":  "ReliefWeb lists this job opportunity as relevant to migration, displacement, refugee protection, or humanitarian response. The role is associated with International Rescue Committee, geography: Kenya, with a listed deadline of 2026-08-31.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0063",
+        "title":  "MiReKoc / BU / CfD International Summer School 2026: Crossing Regions, Shaping Lives — African Migration Corridors in Global Perspective",
+        "source":  "MiReKoc / Boğaziçi University / CfD",
+        "type":  "Training \u0026 events",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.imiscoe.org/news-and-blog/news/news-from-members/2663-mirekoc-bu-cfd-international-summer-school-2026-crossing-regions-shaping-lives-african-migration-corridors-in-global-perspective",
+        "summary":  "International summer school on African migration corridors, organised by MiReKoc, Boğaziçi University and CfD. The opportunity is migration-specific and has an application deadline of 26 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0064",
+        "title":  "2026 IMISCOE Annual Conference PhD Activities",
+        "source":  "IMISCOE",
+        "type":  "Academic \u0026 research",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Europe",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://www.imiscoe.org/news-and-blog/news/news-from-members/2649-2026-imiscoe-annual-conference-phd-activities",
+        "summary":  "PhD activities linked to the 2026 IMISCOE Annual Conference in Oslo. The opportunity is migration-specific through IMISCOE and has a deadline of 24 June 2026.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0065",
+        "title":  "Home Study and Post-Release Services for Unaccompanied Alien Children",
+        "source":  "Administration for Children and Families / Office of Refugee Resettlement",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Open / mixed",
+        "region":  "North America",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://simpler.grants.gov/opportunity/cb2cbb9f-741d-4e6b-ad32-557d751f9903",
+        "summary":  "Funding opportunity for Home Study and Post-Release Services for Unaccompanied Alien Children, listed by the Administration for Children and Families / Office of Refugee Resettlement on Simpler Grants.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0066",
+        "title":  "Accord cadre de collecte de données sur la migration mixte au Sénégal",
+        "source":  "Danish Refugee Council",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4216049/accord-cadre-de-collecte-de-donnees-sur-la-migration-mixte-au-senegal",
+        "summary":  "Danish Refugee Council consultancy/tender opportunity in Senegal. It is relevant to migration governance because the source evidence includes: refugee | migration | migration mixte. Final publication should verify the exact application instructions on the ReliefWeb source page.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0067",
+        "title":  "Framework agreement for technical support services – pool of experts for the srf fmu",
+        "source":  "Danish Refugee Council",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4215211/framework-agreement-technical-support-services-pool-experts-srf-fmu",
+        "summary":  "Danish Refugee Council consultancy/tender opportunity in Senegal. It is relevant to migration governance because the source evidence includes: refugee. Final publication should verify the exact application instructions on the ReliefWeb source page.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0068",
+        "title":  "Gerente de Protección - GDO",
+        "source":  "Danish Refugee Council",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://reliefweb.int/job/4215924/gerente-de-proteccion-gdo",
+        "summary":  "Danish Refugee Council job/consultancy opportunity in Venezuela (Bolivarian Republic of). It is relevant to migration governance because the source evidence includes: refugee. Final publication should verify the exact application instructions on the ReliefWeb source page.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0070",
+        "title":  "Country Director South Sudan (Re-advertisement)",
+        "source":  "Danish Refugee Council",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Africa",
+        "deadline_group":  "This month / soon",
+        "url":  "https://reliefweb.int/job/4215700/country-director-south-sudan-re-advertisement",
+        "summary":  "Danish Refugee Council job opportunity in South Sudan. It is relevant to migration governance because the source evidence includes: refugee | displacement | protection. Final publication should verify the exact application instructions on the ReliefWeb source page.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0072",
+        "title":  "11th International Disaster Law Course",
+        "source":  "ReliefWeb / source-listed training provider",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Global",
+        "deadline_group":  "This month / soon",
+        "url":  "https://reliefweb.int/training/4213791/11th-international-disaster-law-course",
+        "summary":  "11th International Disaster Law Course | ReliefWeb Skip to main content Help Log in ReliefWeb Content Search What are you looking for? Search|t Updates Countries Disasters Organizations Topics Jobs Training Informing humanitarians worldwide 24/7 — a service provided by UN OCHA 11th International Disaster Law Course Organization IIHL Posted 28 May 2026 Traini",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0073",
+        "title":  "International Refugee Assistance Project - Intake and Screening Intern",
+        "source":  "Refugee Rights",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Global",
+        "deadline_group":  "Rolling / open",
+        "url":  "https://jobs.eu.lever.co/refugeerights/493bf855-2930-4c7f-be63-c507ab6088a4",
+        "summary":  "Refugee Rights is recruiting for this role (International Refugee Assistance Project - Intake and Screening Intern) with location listed as This position is based in IRAP Jordan office in Amman, Jordan. IRAP is an equal-opportunity employer The opportunity is treated as Rolling / open / open until filled under the live Lever job policy Application/source link: https://jobs.eu.lever.co/refugeerights/493bf855-2930-4c7f-be63-c507ab6088a4",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0074",
+        "title":  "International Refugee Assistance Project - IRAP Law Student Fellowship 2026-2027",
+        "source":  "Refugee Rights",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Remote / hybrid",
+        "deadline_group":  "Rolling / open",
+        "url":  "https://jobs.eu.lever.co/refugeerights/43ee3a68-486c-4752-be78-946feea7eda7",
+        "summary":  "Refugee Rights is recruiting for this role (International Refugee Assistance Project - IRAP Law Student Fellowship 2026-2027) The opportunity is treated as Rolling / open / open until filled under the live Lever job policy Application/source link: https://jobs.eu.lever.co/refugeerights/43ee3a68-486c-4752-be78-946feea7eda7",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0075",
+        "title":  "International Refugee Assistance Project - Legal Fellow",
+        "source":  "Refugee Rights",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Global",
+        "deadline_group":  "Rolling / open",
+        "url":  "https://jobs.eu.lever.co/refugeerights/3dccdd1f-71db-49a6-bebf-9172c23cba04",
+        "summary":  "Refugee Rights is recruiting for this role (International Refugee Assistance Project - Legal Fellow) with location listed as The fellow will be hosted in IRAP The opportunity is treated as Rolling / open / open until filled under the live Lever job policy Application/source link: https://jobs.eu.lever.co/refugeerights/3dccdd1f-71db-49a6-bebf-9172c23cba04",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0076",
+        "title":  "International Refugee Assistance Project - Operations (HR, Finance, Admin) Intern - Unpaid",
+        "source":  "Refugee Rights",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Remote / hybrid",
+        "deadline_group":  "Rolling / open",
+        "url":  "https://jobs.eu.lever.co/refugeerights/c51253a7-7b6d-48ed-99f6-873f0a7f6e68",
+        "summary":  "Refugee Rights is recruiting for this role (International Refugee Assistance Project - Operations (HR, Finance, Admin) Intern - Unpaid) The opportunity is treated as Rolling / open / open until filled under the live Lever job policy Application/source link: https://jobs.eu.lever.co/refugeerights/c51253a7-7b6d-48ed-99f6-873f0a7f6e68",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0077",
+        "title":  "International Refugee Assistance Project - U.S. Litigation Staff Attorney/ Senior Staff Attorney",
+        "source":  "Refugee Rights",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Remote / hybrid",
+        "deadline_group":  "Rolling / open",
+        "url":  "https://jobs.eu.lever.co/refugeerights/ca934353-b0f3-4be3-873d-b5f02ee7f0d7",
+        "summary":  "Refugee Rights is recruiting for this role (International Refugee Assistance Project - U.S. Litigation Staff Attorney/ Senior Staff Attorney) The opportunity is treated as Rolling / open / open until filled under the live Lever job policy Application/source link: https://jobs.eu.lever.co/refugeerights/ca934353-b0f3-4be3-873d-b5f02ee7f0d7",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0078",
+        "title":  "Global Forum on Migration and Development | Migrant Forum in Asia",
+        "source":  "Migration Forum Asia",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://mfasia.org/mfa_programs/advocacy/global-forum-on-migration-and-development",
+        "summary":  "Verified opportunity from Migration Forum Asia. Source evidence indicates relevance to migration/refugees/diaspora or adjacent human-rights/inclusion work. See source page for full eligibility and application details.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0079",
+        "title":  "Appeal No. 2: Urgent Justice Mechanism for Repatriated Migrant Workers Now | Migrant Forum in Asia",
+        "source":  "Migration Forum Asia",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://mfasia.org/appeal-no-2-urgent-justice-mechanism-for-repatriated-migrant-workers-now",
+        "summary":  "Verified opportunity from Migration Forum Asia. Source evidence indicates relevance to migration/refugees/diaspora or adjacent human-rights/inclusion work. See source page for full eligibility and application details.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0080",
+        "title":  "Internships | Migrant Forum in Asia",
+        "source":  "Migration Forum Asia",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Country-specific / unclear",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://mfasia.org/get-involved/mfa-internships",
+        "summary":  "Verified opportunity from Migration Forum Asia. Source evidence indicates relevance to migration/refugees/diaspora or adjacent human-rights/inclusion work. See source page for full eligibility and application details.",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0082",
+        "title":  "Migrants Campaign Month",
+        "source":  "Migration Forum Asia",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://mfasia.org/campaigns/migrants-campaign-month",
+        "summary":  "Migrants Campaign Month | Migrant Forum in Asia Home Who We Are The Organization Members \u0026 Partners Executive Committee What We Do Campaigns Step It Up People’s Global Action Recruitment Reform #OurHands Migrants Campaign Month Programs Capacity Building Diplomacy Training Program Recruitment Advocacy Global Forum on Migration and Development South Asian Association for Regional Cooperation Association of Southeast A...",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0083",
+        "title":  "International Migrants Day 18 December 2020",
+        "source":  "Migration Forum Asia",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://mfasia.org/international-migrants-day-18-december-2020",
+        "summary":  "International Migrants Day 18 December 2020 | Migrant Forum in Asia Home Who We Are The Organization Members \u0026 Partners Executive Committee What We Do Campaigns Step It Up People’s Global Action Recruitment Reform #OurHands Migrants Campaign Month Programs Capacity Building Diplomacy Training Program Recruitment Advocacy Global Forum on Migration and Development South Asian Association for Regional Cooperation Associ...",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0084",
+        "title":  "Indonesia Migrants Human Rights Training Program Module 4",
+        "source":  "Migration Forum Asia",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Migrant/diaspora groups",
+        "region":  "Global",
+        "deadline_group":  "Expired / archive",
+        "url":  "https://mfasia.org/indonesia-migrants-human-rights-training-program-module-4",
+        "summary":  "Indonesia Migrants Human Rights Training Program Module 4 | Migrant Forum in Asia Home Who We Are The Organization Members \u0026 Partners Executive Committee What We Do Campaigns Step It Up People’s Global Action Recruitment Reform #OurHands Migrants Campaign Month Programs Capacity Building Diplomacy Training Program Recruitment Advocacy Global Forum on Migration and Development South Asian Association for Regional Coop...",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0085",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448399",
+        "summary":  "Deadline: Application Deadline 24 Jul 2026 - 23:59 (Europe/Zagreb) Country Croatia Type of Contract Temporary Job Status Full-time Hours Per Week 8 Of. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0086",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448398",
+        "summary":  "Deadline: Application Deadline 3 Jul 2026 - 23:59 (Europe/Lisbon) Country Portugal Type of Contract Not Applicable Job Status Not Applicable Offer Sta. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0087",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448401",
+        "summary":  "Deadline: Application Deadline 6 Jul 2026 - 23:00 (Europe/Madrid) Country Spain Type of Contract Temporary Job Status Full-time Hours Per Week 35 Offe. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0088",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Funding \u0026 grants",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448397",
+        "summary":  "Deadline: Application Deadline 13 Jul 2026 - 23:59 (Europe/Rome) Country Italy Type of Contract Temporary Job Status Full-time Is the job funded throu. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0089",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448402",
+        "summary":  "Deadline: Application Deadline 13 Jul 2026 - 23:00 (Europe/Lisbon) Country Portugal Type of Contract Not Applicable Job Status Not Applicable Offer St. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0090",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448394",
+        "summary":  "Deadline: Application Deadline 3 Jul 2026 - 23:59 (Europe/Madrid) Country Spain Type of Contract Permanent Job Status Full-time Hours Per Week 37,5 Of. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0091",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448393",
+        "summary":  "Deadline: Application Deadline 25 Jul 2026 - 23:59 (Europe/Warsaw) Country Poland Type of Contract Permanent Job Status Part-time Offer Starting Date. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0092",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448392",
+        "summary":  "Deadline: Application Deadline 14 Jul 2026 - 23:00 (Europe/Madrid) Country Spain Type of Contract Permanent Job Status Full-time Hours Per Week 37,5 O. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0093",
+        "title":  "Job offer",
+        "source":  "EURAXESS",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Researchers \u0026 students",
+        "region":  "Global",
+        "deadline_group":  "No date listed",
+        "url":  "https://euraxess.ec.europa.eu/jobs/448391",
+        "summary":  "Deadline: Application Deadline 3 Jul 2026 - 23:59 (Europe/Lisbon) Country Portugal Type of Contract Not Applicable Job Status Not Applicable Offer Sta. Jobs and Career Opportunities in Europe | EURAXESS Job offer Jobs and Career Opportunities in Europe | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researchers For Organisations Initiatives Science4Refugees ERA4Ukraine Network EURAXESS National Portals EURAXESS Network Map EURAXESS Worldwide EURAXESS Support Centres ERA Talent Platform HR Excellence in Research RESAVER Research Careers Observatory Innovation Talent Platform",
+        "quality":  ""
+    },
+    {
+        "id":  "MOC-0094",
+        "title":  "Executive Vice President (EVP) - Programs and Strategy",
+        "source":  "International Refugee Assistance Project Careers",
+        "type":  "Jobs \u0026 internships",
+        "audience":  "Open / mixed",
+        "region":  "Remote / hybrid",
+        "deadline_group":  "Rolling / open",
+        "url":  "https://jobs.eu.lever.co/refugeerights/bfb75247-30e9-495b-9c09-49edee8c6620",
+        "summary":  "Senior leadership role at the International Refugee Assistance Project / Refugee Rights. Evidence review identified this as a specific, non-duplicate migration-rights job opportunity. Location extracted as Remote. Human approval is required before append.",
+        "quality":  ""
+    }
+];
+const IS_PRIVATE = false;
+
+function text(value) {
+  if (value === null || value === undefined) return "";
+  return String(value);
+}
+
+function htmlEscape(value) {
+  return text(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function first(row, keys) {
+  for (let i = 0; i < keys.length; i++) {
+    const value = row[keys[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== "") {
+      return String(value).trim();
+    }
+  }
+  return "";
+}
+
+function normalizeType(row) {
+  let raw = first(row, ["type", "category", "opportunity_type", "opportunity_category"]);
+  raw = raw.replace("Consultations & participation", "Consultations & participation");
+  raw = raw.replace("Consultations &amp; participation", "Consultations & participation");
+  if (raw === "") return "Other opportunities";
+  return raw;
+}
+
+function normalizeAudience(row) {
+  const raw = first(row, ["audience", "target_audience", "eligible_applicants", "who_can_apply"]);
+  if (raw === "") return "Open / mixed";
+  return raw;
+}
+
+function normalizeDeadline(row) {
+  const raw = first(row, ["deadline_group", "deadline_status", "deadline_category", "deadline"]);
+  const lower = raw.toLowerCase();
+  if (lower.includes("expired") || lower.includes("archive")) return "Archive";
+  if (lower.includes("closing soon")) return "Closing soon";
+  if (lower.includes("rolling")) return "Rolling / open";
+  if (lower.includes("no clear") || lower.includes("no date")) return "No date listed";
+  if (lower.includes("open") || lower.includes("mixed")) return "Open / mixed";
+  return "Open / mixed";
+}
+
+function normalizeLocation(row) {
+  const raw = first(row, ["region", "region_group", "location", "geography", "geographic_scope", "country"]);
+  const lower = raw.toLowerCase();
+
+  function hasAny(terms) {
+    return terms.some(function(term) { return lower.includes(term); });
+  }
+
+  if (lower.trim() === "") return "";
+  if (hasAny(["remote", "hybrid", "online"])) return "";
+
+  if (hasAny(["global", "worldwide", "international", "any country"])) return "Global";
+
+  if (hasAny([
+    "multiple regions",
+    "multi-region",
+    "multi regional",
+    "cross-regional",
+    "cross regional",
+    "several regions",
+    "asia-pacific",
+    "asia pacific",
+    "mena",
+    "middle east and north africa",
+    "middle east & north africa"
+  ])) return "Multiple regions";
+
+  if (hasAny([
+    "africa",
+    "african",
+    "north africa",
+    "sub-saharan",
+    "morocco",
+    "algeria",
+    "tunisia",
+    "libya",
+    "egypt",
+    "sudan",
+    "ethiopia",
+    "kenya",
+    "uganda",
+    "ghana",
+    "nigeria",
+    "senegal",
+    "somalia",
+    "south africa",
+    "congo",
+    "drc"
+  ])) return "Africa";
+
+  if (hasAny([
+    "americas",
+    "america",
+    "latin america",
+    "north america",
+    "south america",
+    "caribbean",
+    "united states",
+    "usa",
+    "canada",
+    "mexico",
+    "brazil",
+    "colombia",
+    "argentina",
+    "chile",
+    "peru",
+    "ecuador"
+  ])) return "Americas";
+
+  if (hasAny([
+    "asia",
+    "asian",
+    "middle east",
+    "gulf",
+    "arab",
+    "jordan",
+    "lebanon",
+    "iraq",
+    "iran",
+    "syria",
+    "saudi",
+    "qatar",
+    "uae",
+    "israel",
+    "palestine",
+    "afghanistan",
+    "pakistan",
+    "india",
+    "bangladesh",
+    "nepal",
+    "thailand",
+    "philippines",
+    "indonesia",
+    "japan",
+    "china",
+    "korea"
+  ])) return "Asia";
+
+  if (hasAny([
+    "europe",
+    "european",
+    "eu ",
+    "eu-",
+    "e.u.",
+    "united kingdom",
+    "uk",
+    "england",
+    "scotland",
+    "wales",
+    "ireland",
+    "germany",
+    "france",
+    "italy",
+    "spain",
+    "portugal",
+    "netherlands",
+    "belgium",
+    "switzerland",
+    "austria",
+    "sweden",
+    "norway",
+    "denmark",
+    "finland",
+    "greece",
+    "poland",
+    "romania",
+    "bulgaria",
+    "hungary",
+    "croatia",
+    "serbia",
+    "balkan"
+  ])) return "Europe";
+
+  if (hasAny([
+    "oceania",
+    "pacific",
+    "australia",
+    "new zealand",
+    "fiji",
+    "samoa"
+  ])) return "Oceania";
+
+  return "";
+}
+
+function rowTitle(row) {
+  return first(row, ["title", "translated_title_en", "original_title", "name"]);
+}
+
+function rowSource(row) {
+  return first(row, ["source", "source_name", "provider", "organization", "organisation"]);
+}
+
+function rowSummary(row) {
+  return first(row, ["summary", "short_summary", "description", "original_excerpt"]);
+}
+
+function rowUrl(row) {
+  return first(row, ["url", "final_url", "source_url", "opportunity_url", "application_url", "link"]);
+}
+
+function rowId(row) {
+  return first(row, ["id", "candidate_id", "opportunity_id", "record_id"]);
+}
+
+function fillSelect(id, label, values) {
+  const select = document.getElementById(id);
+  select.innerHTML = "";
+  const all = document.createElement("option");
+  all.value = "";
+  all.textContent = label;
+  select.appendChild(all);
+
+  values.forEach(function(value) {
+    if (!value) return;
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    select.appendChild(option);
+  });
+}
+
+function uniqueSorted(values) {
+  const clean = values.filter(function(v) { return v && String(v).trim() !== ""; });
+  return Array.from(new Set(clean)).sort(function(a, b) { return a.localeCompare(b); });
+}
+
+function setupFilters() {
+  fillSelect("typeFilter", "All types", uniqueSorted(DATA.map(normalizeType)));
+  fillSelect("audienceFilter", "All audiences", uniqueSorted(DATA.map(normalizeAudience)));
+}
+
+function isArchive(row) {
+  return normalizeDeadline(row) === "Archive";
+}
+
+function getFilteredRows() {
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const type = document.getElementById("typeFilter").value;
+  const audience = document.getElementById("audienceFilter").value;
+  const location = document.getElementById("locationFilter").value;
+  const deadline = document.getElementById("deadlineFilter").value;
+
+  return DATA.filter(function(row) {
+    const deadlineValue = normalizeDeadline(row);
+
+    if (deadline === "") {
+      if (deadlineValue === "Archive") return false;
+    } else if (deadline !== deadlineValue) {
+      return false;
+    }
+
+    if (type && normalizeType(row) !== type) return false;
+    if (audience && normalizeAudience(row) !== audience) return false;
+    if (location && normalizeLocation(row) !== location) return false;
+
+    if (q) {
+      const haystack = [
+        rowTitle(row),
+        rowSource(row),
+        normalizeType(row),
+        normalizeAudience(row),
+        normalizeLocation(row),
+        normalizeDeadline(row),
+        rowSummary(row)
+      ].join(" ").toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+
+    return true;
+  });
+}
+
+function renderCard(row) {
+  const title = htmlEscape(rowTitle(row));
+  const source = htmlEscape(rowSource(row));
+  const type = htmlEscape(normalizeType(row));
+  const audience = htmlEscape(normalizeAudience(row));
+  const location = htmlEscape(normalizeLocation(row));
+  const deadline = htmlEscape(normalizeDeadline(row));
+  const summary = htmlEscape(rowSummary(row));
+  const url = htmlEscape(rowUrl(row));
+  const id = htmlEscape(rowId(row));
+  const deadlineClass = normalizeDeadline(row) === "Closing soon" ? " deadline-closing" : normalizeDeadline(row) === "Archive" ? " deadline-archive" : "";
+
+  let link = "";
+  if (url) {
+    link = '<a href="' + url + '" target="_blank" rel="noopener noreferrer">Open source</a>';
+  }
+
+  let locationTag = "";
+  if (location) {
+    locationTag = '<span class="tag">' + location + '</span>';
+  }
+
+  return '<article class="card">' +
+    '<h2>' + title + '</h2>' +
+    '<div class="source">' + source + '</div>' +
+    '<div class="tags">' +
+      '<span class="tag">' + type + '</span>' +
+      '<span class="tag">' + audience + '</span>' +
+      locationTag +
+      '<span class="tag' + deadlineClass + '">' + deadline + '</span>' +
+    '</div>' +
+    '<div class="idline">ID: ' + id + '</div>' +
+    '<div class="summary">' + summary + '</div>' +
+    link +
+  '</article>';
+}
+
+function render() {
+  const openRows = DATA.filter(function(row) { return !isArchive(row); });
+  const closingRows = DATA.filter(function(row) { return normalizeDeadline(row) === "Closing soon"; });
+  const rows = getFilteredRows();
+
+  document.getElementById("openCount").textContent = openRows.length;
+  document.getElementById("closingSoonCount").textContent = closingRows.length;
+
+  const deadline = document.getElementById("deadlineFilter").value;
+  const scopeText = deadline === "Archive" ? "archived opportunities" : "current opportunities";
+    const searchActive = document.getElementById("search").value.trim() !== "";
+  const typeActive = document.getElementById("typeFilter").value !== "";
+  const audienceActive = document.getElementById("audienceFilter").value !== "";
+  const locationActive = document.getElementById("locationFilter").value !== "";
+  const hasActiveFilter = searchActive || typeActive || audienceActive || locationActive || deadline !== "";
+  let metaText = "";
+  if (deadline === "Archive") {
+    metaText = "Showing " + rows.length + " archived opportunities.";
+  } else if (hasActiveFilter) {
+    metaText = "Showing " + rows.length + " matching opportunities.";
+  } else {
+    metaText = "Showing " + rows.length + " current opportunities.";
+  }
+  document.getElementById("resultMeta").textContent = metaText;
+
+  const cards = document.getElementById("cards");
+  if (rows.length === 0) {
+    cards.innerHTML = '<div class="empty">No opportunities match these filters.</div>';
+    return;
+  }
+
+  cards.innerHTML = rows.map(renderCard).join("");
+}
+
+setupFilters();
+document.getElementById("locationFilter").value = "";
+document.getElementById("deadlineFilter").value = "";
+["search", "typeFilter", "audienceFilter", "locationFilter", "deadlineFilter"].forEach(function(id) {
+  document.getElementById(id).addEventListener("input", render);
+  document.getElementById(id).addEventListener("change", render);
+});
+render();
 </script>
 </body>
 </html>
+
+
+
