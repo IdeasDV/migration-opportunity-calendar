@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "id":  "MOC-0003",
         "title":  "Postdoctoral Researcher in Migration Studies — ERC Consolidator Grant, US and Latin America",
@@ -418,5 +418,19 @@
         "summary":  "IOM in CAR is expanding its operational scope to meet growing challenges with a comprehensive, multi-sectoral response, including Humanitarian Assistance and Protection: Delivering lifesaving aid (shelter, WASH, health, NFIs) and protection services to IDPs, returnees, refugees, and vulnerable migrants, including GBV prevention, child protection, and anti-trafficking support. Displacement Tracking and Data Management: Deploying the Displacement Tracking Matrix (DTM) to provid...",
         "status":  "active",
         "source_url":  "https://reliefweb.int/job/4220731/21621-data-and-stabilisation-officer-p2"
+    },
+    {
+        "id":  "MOC-0108",
+        "title":  "PreQual 22",
+        "provider":  "maiz – autonomes zentrum von \u0026 für migrantinnen",
+        "opportunity_type":  "Training / pre-qualification course",
+        "deadline":  "Wir nehmen laufend Anmeldungen für PreQual an.",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "Scharitzerstraße 6-8, 1. Stock, 4020 Linz, Austria",
+        "source_language":  "German",
+        "summary":  "A five-month pre-qualification course for migrant women interested in health and care professions or related training. It provides theory, individual advice, first-aid training, practical exposure, and a participation certificate, aiming to facilitate access to health and care education in Austria.",
+        "status":  "active_rolling_or_recurring",
+        "source_url":  "https://www.maiz.at/de/bereiche/maiz-bildung"
     }
 ]
