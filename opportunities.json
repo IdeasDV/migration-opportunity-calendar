@@ -432,5 +432,19 @@
         "summary":  "A five-month pre-qualification course for migrant women interested in health and care professions or related training. It provides theory, individual advice, first-aid training, practical exposure, and a participation certificate, aiming to facilitate access to health and care education in Austria.",
         "status":  "active_rolling_or_recurring",
         "source_url":  "https://www.maiz.at/de/bereiche/maiz-bildung"
+    },
+    {
+        "id":  "MOC-0109",
+        "title":  "Asesoramiento de extranjería",
+        "provider":  "Red Solidaria Barcelona",
+        "opportunity_type":  "Immigration advice service",
+        "deadline":  "",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "Barcelona, Spain",
+        "source_language":  "Spanish",
+        "summary":  "Asesoramiento de extranjería is offered by Red Solidaria Barcelona. Type: Immigration advice service. Geography: Barcelona, Spain. Target group: People seeking immigration advice. Eligibility: Not stated; free, in-person walk-in personalised immigration advice is offered. Deadline: rolling or open-ended.",
+        "status":  "active",
+        "source_url":  "https://fedelatina.org/"
     }
 ]
