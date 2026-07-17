@@ -446,5 +446,47 @@
         "summary":  "Asesoramiento de extranjería is offered by Red Solidaria Barcelona. Type: Immigration advice service. Geography: Barcelona, Spain. Target group: People seeking immigration advice. Eligibility: Not stated; free, in-person walk-in personalised immigration advice is offered. Deadline: rolling or open-ended.",
         "status":  "active",
         "source_url":  "https://fedelatina.org/"
+    },
+    {
+        "id":  "MOC-0110",
+        "title":  "Call for Proposals 2026 - Border Management",
+        "provider":  "Migration Partnership Facility (ICMPD)",
+        "opportunity_type":  "Funding or grant",
+        "deadline":  "Rolling",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "EU Member States and eligible partner countries",
+        "source_language":  "en",
+        "summary":  "Rolling Migration Partnership Facility call for border management projects. Opened 13 July 2026; applications are accepted until funds are depleted. The financial envelope is EUR 5 million from BMVI, and funded actions must end by 30 June 2031.",
+        "status":  "Open - rolling until funds are depleted",
+        "source_url":  "https://www.migrationpartnershipfacility.eu/calls-for-proposals/cfp2026-bm"
+    },
+    {
+        "id":  "MOC-0111",
+        "title":  "Call for Proposals 2026 - Internal Security",
+        "provider":  "Migration Partnership Facility (ICMPD)",
+        "opportunity_type":  "Funding or grant",
+        "deadline":  "Rolling",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "EU Member States and eligible partner countries",
+        "source_language":  "en",
+        "summary":  "Rolling Migration Partnership Facility call for internal security projects involving participating EU Member States and eligible partner countries. Opened 13 July 2026; applications are accepted until funds are depleted. The envelope is EUR 3 million from ISF, and funded actions must end by 30 June 2031.",
+        "status":  "Open - rolling until funds are depleted",
+        "source_url":  "https://www.migrationpartnershipfacility.eu/calls-for-proposals/cfp2026-is"
+    },
+    {
+        "id":  "MOC-0112",
+        "title":  "Call for Proposals 2026 - Migration Partnerships",
+        "provider":  "Migration Partnership Facility (ICMPD)",
+        "opportunity_type":  "Funding or grant",
+        "deadline":  "Rolling",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "EU Member States and eligible partner countries",
+        "source_language":  "en",
+        "summary":  "Rolling Migration Partnership Facility call supporting migration partnerships between EU Member States and partner countries. Opened 13 July 2026; applications are accepted until funds are depleted. The envelope is EUR 6 million from AMIF, and funded actions must end by 30 June 2031.",
+        "status":  "Open - rolling until funds are depleted",
+        "source_url":  "https://www.migrationpartnershipfacility.eu/calls-for-proposals/cfp2026-mps"
     }
 ]
