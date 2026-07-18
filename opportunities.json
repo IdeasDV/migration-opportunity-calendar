@@ -488,5 +488,33 @@
         "summary":  "Rolling Migration Partnership Facility call supporting migration partnerships between EU Member States and partner countries. Opened 13 July 2026; applications are accepted until funds are depleted. The envelope is EUR 6 million from AMIF, and funded actions must end by 30 June 2031.",
         "status":  "Open - rolling until funds are depleted",
         "source_url":  "https://www.migrationpartnershipfacility.eu/calls-for-proposals/cfp2026-mps"
+    },
+    {
+        "id":  "MOC-0113",
+        "title":  "Open CAT Call 2027-2029",
+        "provider":  "NetIAS Calls for Applications",
+        "opportunity_type":  "Funding / grant",
+        "deadline":  "2026-09-13",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "Europe",
+        "source_language":  "",
+        "summary":  "Provider: NetIAS Calls for Applications. Type: Funding / grant. Geography: Europe. Status: Open. Open Call for Constructive Advanced Thinking (CAT) Programme 2027 - 2029 Deadline for applications: 13 September 2026, 23:59 CET CAT supports small, interdisciplinary teams of early-career researchers to develop innovat… At the end of the project, CAT teams are expected to submit a final updated report and complete a short questionnaire. In keeping with the policies of the participating institutes, researchers retain the intellectual pr… representatives, or civil society actors where relevant. The programme is designed to support the development of new research directions and collaborations, and may also provide a foundation for future joint projects, i… e extended beyond 10 years after the PhD for any member of the group for certain properly documented circumstances such as maternity and pa…",
+        "status":  "Open",
+        "source_url":  "https://netias.science/sites/default/files/documents/2026-05/open-call-for-constructive-advanced-thinking-2027-2029_0.pdf"
+    },
+    {
+        "id":  "MOC-0114",
+        "title":  "Find jobs and opportunities",
+        "provider":  "EURAXESS National Portals",
+        "opportunity_type":  "Funding / grant",
+        "deadline":  "2026-07-18",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "43 European countries",
+        "source_language":  "en",
+        "summary":  "Provider: EURAXESS National Portals. Type: Funding / grant. Geography: 43 European countries. Status: Open. n Europe - MSCA Horizon Europe – COFUND Interreg LIFE Programme NextGenerationEU Not funded by a EU programme Other EU programme Funding Type Funding Mobility Incoming Travel Grants Mobility Outgoing Offer Category HR E… Jobs, Career and Funding Opportunities | EURAXESS Skip to main content Log in Search Search EURAXESS Researchers in motion Menu Close Menu Back Home Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Eur… Jobs \u0026 Opportunities Find Jobs \u0026 Opportunities Living \u0026 Working in Europe Coming to Europe Living in Europe Working in Europe Retiring in Europe Country information search Leaving Europe Career Development For Researche…",
+        "status":  "Open",
+        "source_url":  "https://euraxess.ec.europa.eu/jobs/search"
     }
 ]
