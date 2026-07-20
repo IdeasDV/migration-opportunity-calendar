@@ -600,5 +600,19 @@
         "summary":  "iash.ed.ac.uk offers this fellowship opportunity connected to United Kingdom. The opportunity page is open, but the exact deadline still requires confirmation. The Artist at Risk Fellowship | IASH Skip to main content Toggle navigation MENU search Search form go About Director\u0027s Welcome History of the Institute Location Governance People Current fellows Future fellows Affiliates Alumni Staff Management Group Advisory Board Research Resources for fellows IASH libraries and archives Fellowship programmes For UoE researchers For early career researchers For mid-career / senior researchers For playwrights For artists at risk Frequently asked questions Engagement Contact Supp…",
         "status":  "Open - deadline not resolved",
         "source_url":  "https://www.iash.ed.ac.uk/artist-risk-fellowship"
+    },
+    {
+        "id":  "MOC-0137",
+        "title":  "CAPES-Humboldt Research Fellowship",
+        "provider":  "Alexander von Humboldt Foundation / CAPES",
+        "opportunity_type":  "Research fellowship",
+        "deadline":  "30 November 2026",
+        "deadline_parsed":  "2026-11-30",
+        "days_to_deadline":  "133",
+        "geography":  "Germany; applicants residing in Brazil",
+        "source_language":  "English",
+        "summary":  "Research fellowship for postdoctoral and experienced researchers residing in Brazil, supporting a 6-24 month research stay in Germany; applications close on the last working day of May or November.",
+        "status":  "Active",
+        "source_url":  "https://www.humboldt-foundation.de/en/apply/sponsorship-programmes/capes-humboldt-research-fellowship"
     }
 ]
