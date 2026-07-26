@@ -703,5 +703,50 @@
         "status":  "private_only_preflight_ready",
         "source_url":  "https://segib.org/es/convocatoria-maleta-abierta-2026-para-proyectos-de-arte-migrante-en-iberoamerica/",
         "target_group":  "Nonprofit cultural and civil-society entities developing migrant-art projects in eligible Ibero-American countries."
+    },
+    {
+        "id":  "MOC-0146",
+        "title":  "Call for Proposals 2026 - Migration Partnerships",
+        "provider":  "Migration Partnership Facility",
+        "opportunity_type":  "Migration Partnerships",
+        "deadline":  "No deadline. Applications are received on a rolling basis until depletion of funds",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "",
+        "source_language":  "",
+        "summary":  "",
+        "status":  "Open",
+        "source_url":  "https://www.migrationpartnershipfacility.eu/calls-for-proposals",
+        "target_group":  ""
+    },
+    {
+        "id":  "MOC-0147",
+        "title":  "Call for Proposals 2026 - Border Management",
+        "provider":  "Migration Partnership Facility",
+        "opportunity_type":  "Border Management",
+        "deadline":  "No deadline. Applications are received on a rolling basis until depletion of funds",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "",
+        "source_language":  "",
+        "summary":  "",
+        "status":  "Open",
+        "source_url":  "https://www.migrationpartnershipfacility.eu/calls-for-proposals",
+        "target_group":  ""
+    },
+    {
+        "id":  "MOC-0148",
+        "title":  "Call for Proposals 2026 - Internal Security",
+        "provider":  "Migration Partnership Facility",
+        "opportunity_type":  "Internal Security",
+        "deadline":  "No deadline. Applications are received on a rolling basis until depletion of funds",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "",
+        "source_language":  "",
+        "summary":  "",
+        "status":  "Open",
+        "source_url":  "https://www.migrationpartnershipfacility.eu/calls-for-proposals",
+        "target_group":  ""
     }
 ]
