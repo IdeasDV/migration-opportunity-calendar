@@ -883,5 +883,35 @@
         "status":  "open",
         "source_url":  "https://help.unhcr.org/brazil/en/2026/07/10/education-opportunity-19/",
         "target_group":  ""
+    },
+    {
+        "id":  "MOC-0159",
+        "title":  "Migrants and Refugees Grants",
+        "provider":  "A B Charitable Trust",
+        "opportunity_type":  "Funding / grants / calls",
+        "deadline":  "",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "",
+        "source_language":  "",
+        "summary":  "R203R2 preflight from R202 content-ready candidate R200R1-CAND-001; official source https://abcharitabletrust.org.uk/grant/migrants-and-refugees; evidence C:\\Users\\danie\\Migration_Opportunity_Calendar\\outputs\\peer_research_engine\\runs\\R201_b69643cc24a7\\evidence\\R200R1-CAND-001.txt; no apply.",
+        "status":  "RESEARCH_VERIFIED",
+        "source_url":  "https://abcharitabletrust.org.uk/grant/migrants-and-refugees",
+        "target_group":  ""
+    },
+    {
+        "id":  "MOC-0161",
+        "title":  "Mid-Career Research Fellowships",
+        "provider":  "African Research Universities Alliance (ARUA)",
+        "opportunity_type":  "research fellowship",
+        "deadline":  "",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "",
+        "source_language":  "",
+        "summary":  "R203R2 preflight from R202 content-ready candidate R200R1-CAND-016; official source https://arua.org/mid-career-research-fellowships; evidence C:\\Users\\danie\\Migration_Opportunity_Calendar\\outputs\\peer_research_engine\\runs\\R201_b69643cc24a7\\evidence\\R200R1-CAND-016.txt; no apply.",
+        "status":  "RESEARCH_VERIFIED",
+        "source_url":  "https://arua.org/mid-career-research-fellowships",
+        "target_group":  ""
     }
 ]
