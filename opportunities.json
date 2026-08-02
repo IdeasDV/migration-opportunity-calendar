@@ -1048,5 +1048,20 @@
         "status":  "active",
         "source_url":  "https://eeagrants.org/en/eea-civil-society-fund-portugal/calls/call-applications-02-large-projects",
         "target_group":  "Portuguese civil-society organisations delivering human-rights, anti-discrimination and social-justice initiatives, including support for migrants and refugees."
+    },
+    {
+        "id":  "MOC-0172",
+        "title":  "Climate Mobility Cohort 2026",
+        "provider":  "ICLEI USA",
+        "opportunity_type":  "CLIMATE_MOBILITY_NICHE",
+        "deadline":  "2026-08-31",
+        "deadline_parsed":  "",
+        "days_to_deadline":  "",
+        "geography":  "",
+        "source_language":  "",
+        "summary":  "",
+        "status":  "",
+        "source_url":  "https://icleiusa.org/cohorts/climate-mobility-cohort-2026/",
+        "target_group":  ""
     }
 ]
