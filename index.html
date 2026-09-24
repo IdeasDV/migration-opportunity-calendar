@@ -240,6 +240,151 @@ input, select {
     .card { padding: 20px 18px; }
   }
 </style>
+<style id="moc-applied-filters-style-v14">
+/* V14: only visible when one or more dropdown filters are active. */
+.moc-applied-filters-v14[hidden]{display:none}
+.moc-applied-filters-v14{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:10px 18px 12px;
+  border-bottom:1px solid var(--line);
+  color:var(--muted);
+}
+.moc-applied-label-v14{
+  margin-right:2px;
+  font-size:13px;
+  font-weight:600;
+  color:#756a60;
+}
+.moc-applied-chip-v14{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  min-height:30px;
+  padding:5px 8px 5px 10px;
+  border:1px solid #dccfbe;
+  border-radius:999px;
+  background:#fffdfa;
+  color:#514940;
+  font:500 13px/1.2 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+.moc-applied-chip-v14 strong{
+  font-weight:650;
+  color:#403a34;
+}
+.moc-applied-remove-v14{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:#8a7768;
+  font:600 16px/1 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  cursor:pointer;
+  padding:1px 3px;
+  border-radius:50%;
+}
+.moc-applied-remove-v14:hover,
+.moc-applied-remove-v14:focus-visible{
+  background:#f1e8dc;
+  color:#4f443b;
+}
+.moc-applied-clear-v14{
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:var(--accent);
+  font:600 13px/1.2 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  cursor:pointer;
+  padding:5px 6px;
+}
+.moc-applied-clear-v14:hover,
+.moc-applied-clear-v14:focus-visible{
+  text-decoration:underline;
+}
+@media(max-width:620px){
+  .moc-applied-filters-v14{
+    padding:9px 12px 11px;
+  }
+}
+</style>
+<style id="moc-status-semantic-v15">
+/* V15: status/deadline is semantic; other tag families remain intentionally restrained. */
+:root{
+  --moc-v15-open-bg:#edf6f1;
+  --moc-v15-open-border:#78aa98;
+  --moc-v15-open-text:#245f50;
+  --moc-v15-closing-bg:#fbf0e8;
+  --moc-v15-closing-border:#c9825f;
+  --moc-v15-closing-text:#8a4527;
+  --moc-v15-neutral-bg:#f5f2ee;
+  --moc-v15-neutral-border:#d3c9be;
+  --moc-v15-neutral-text:#655e57;
+}
+
+/* Card status chips: readable without any legend. */
+#cards > article .moc-chip--status-deadline,
+#cards > article .moc-chip--status-rolling{
+  background:var(--moc-v15-open-bg)!important;
+  border-color:var(--moc-v15-open-border)!important;
+  color:var(--moc-v15-open-text)!important;
+  border-width:1.5px!important;
+  font-weight:600!important;
+}
+#cards > article .moc-chip--status-closing{
+  background:var(--moc-v15-closing-bg)!important;
+  border-color:var(--moc-v15-closing-border)!important;
+  color:var(--moc-v15-closing-text)!important;
+  border-width:1.5px!important;
+  font-weight:600!important;
+}
+#cards > article .moc-chip--status-nodate,
+#cards > article .moc-chip--status-archive{
+  background:var(--moc-v15-neutral-bg)!important;
+  border-color:var(--moc-v15-neutral-border)!important;
+  color:var(--moc-v15-neutral-text)!important;
+  border-width:1px!important;
+  font-weight:500!important;
+}
+
+/* Selected Status dropdown: subtle semantic outline, still a standard neutral control. */
+#deadlineFilter.moc-status-v15-open{
+  color:var(--moc-v15-open-text)!important;
+  border-color:var(--moc-v15-open-border)!important;
+  box-shadow:0 0 0 1px rgba(47,111,93,.08);
+  font-weight:600;
+}
+#deadlineFilter.moc-status-v15-closing{
+  color:var(--moc-v15-closing-text)!important;
+  border-color:var(--moc-v15-closing-border)!important;
+  box-shadow:0 0 0 1px rgba(169,87,47,.08);
+  font-weight:600;
+}
+#deadlineFilter.moc-status-v15-neutral{
+  color:var(--moc-v15-neutral-text)!important;
+  border-color:var(--moc-v15-neutral-border)!important;
+}
+#deadlineFilter.moc-status-v15-default{
+  color:var(--text);
+}
+
+/* Status chip in the V14 'Filtered by' row mirrors the same semantics. */
+.moc-applied-chip-v14.moc-status-v15-open{
+  background:var(--moc-v15-open-bg);
+  border-color:var(--moc-v15-open-border);
+  color:var(--moc-v15-open-text);
+}
+.moc-applied-chip-v14.moc-status-v15-closing{
+  background:var(--moc-v15-closing-bg);
+  border-color:var(--moc-v15-closing-border);
+  color:var(--moc-v15-closing-text);
+}
+.moc-applied-chip-v14.moc-status-v15-neutral{
+  background:var(--moc-v15-neutral-bg);
+  border-color:var(--moc-v15-neutral-border);
+  color:var(--moc-v15-neutral-text);
+}
+</style>
 </head>
 <body>
 <div class="moc-local-candidate-banner">LOCAL REVIEW CANDIDATE - refined taxonomy, responsive cards and expandable details - not published</div>
@@ -249,35 +394,21 @@ input, select {
 </header>
 
 <section class="controls">
-  <input id="search" placeholder="Search..." aria-label="Search opportunities">
+  <input id="search" placeholder="Search opportunities..." aria-label="Search opportunities">
   <select id="typeFilter" aria-label="Filter by type"></select>
   <select id="audienceFilter" aria-label="Filter by audience"></select>
-  <select id="locationFilter" aria-label="Filter by location">
-    <option value="">All locations</option>
-    <option>Global</option>
-    <option>Africa</option>
-    <option>Americas</option>
-    <option>Asia</option>
-    <option>Europe</option>
-    <option>Oceania</option>
-    <option>Multiple regions</option>
-  </select>
-  <select id="deadlineFilter" aria-label="Filter by deadline">
-    <option value="">Current opportunities</option>
-    <option>Closing soon</option>
-    <option>Open / mixed</option>
-    <option>Rolling / open</option>
-    <option>No date listed</option>
-    <option>Archive</option>
-  </select>
+  <select id="locationFilter" aria-label="Filter by location"> <option value="">All locations</option> <option>Africa</option> <option>Americas</option> <option>Asia</option> <option>Europe</option> <option>Global</option> <option>Multiple regions</option> <option>Oceania</option> </select>
+  <select id="deadlineFilter" aria-label="Filter by status"> <option value="">All current opportunities</option> <option value="Closing soon">Closing soon</option> <option value="Open / mixed">Open with deadline</option> <option value="Rolling / open">Rolling / ongoing</option> <option value="No date listed">Deadline not listed</option> <option value="Archive">Archived opportunities</option> </select>
 </section>
+<div id="moc-applied-filters-v14" class="moc-applied-filters-v14" aria-live="polite" hidden></div>
 
 <section class="stats">
-  <div class="stat"><div class="num" id="totalCount">0</div><div class="label">total public records</div></div>
-  <div class="stat"><div class="num" id="openCount">0</div><div class="label">current opportunities</div></div>
-  <div class="stat"><div class="num" id="closingSoonCount">0</div><div class="label">closing soon</div></div>
-  <div class="stat"><div class="num" id="archiveCount">0</div><div class="label">archived opportunities</div></div>
+  <div class="stat moc-stat-current"><div class="num" id="openCount">0</div><div class="label">Current opportunities</div></div>
+  <div class="stat moc-stat-closing"><div class="num" id="closingSoonCount">0</div><div class="label">Closing soon</div></div>
+  <div class="stat moc-stat-archived"><div class="num" id="archiveCount">0</div><div class="label">Archived</div></div>
+  <div class="stat moc-stat-tracked"><div class="num" id="totalCount">0</div><div class="label">Tracked to date</div></div>
 </section>
+
 
 <div class="meta" id="resultMeta"></div>
 <section class="cards" id="cards"></section>
@@ -1496,12 +1627,19 @@ function normalizeAudience(row) {
   return normalizeAudiences(row)[0];
 }
 
+function formatPublicDate(value) {
+  if (!value) return "";
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return String(value.getUTCDate()).padStart(2, "0") + " " + months[value.getUTCMonth()] + " " + value.getUTCFullYear();
+}
+
 function deadlineLabel(row) {
   const group = normalizeDeadline(row);
   const raw = first(row, ["deadline", "deadline_parsed"]);
+  const publicDate = formatPublicDate(parseDeadlineDate(row));
   if (group === "Archive") return "Archive";
-  if (group === "Closing soon") return raw ? "Closes " + raw : "Closing soon";
-  if (group === "Open / mixed") return raw ? "Deadline " + raw : "Open";
+  if (group === "Closing soon") return publicDate ? "Closes " + publicDate : (raw ? "Closes " + raw : "Closing soon");
+  if (group === "Open / mixed") return publicDate ? "Deadline " + publicDate : (raw ? "Deadline " + raw : "Open");
   if (group === "Rolling / open") return "Rolling / open";
   if (group === "No date listed") return "No deadline listed";
   return group || "Open";
@@ -1711,7 +1849,7 @@ function normalizeLocation(row) {
 }
 
 function rowTitle(row) {
-  return first(row, ["title", "translated_title_en", "original_title", "name"]);
+  return first(row, ["display_title", "title", "translated_title_en", "original_title", "name"]);
 }
 
 function rowSource(row) {
@@ -1719,7 +1857,7 @@ function rowSource(row) {
 }
 
 function rowSummary(row) {
-  return first(row, ["summary", "short_summary", "description", "original_excerpt"]);
+  return first(row, ["display_summary", "summary", "short_summary", "description", "original_excerpt"]);
 }
 
 function rowUrl(row) {
@@ -1730,7 +1868,7 @@ function rowId(row) {
   return first(row, ["id", "candidate_id", "opportunity_id", "record_id"]);
 }
 
-function fillSelect(id, label, values) {
+function mocFilterLabel(value) { const labels = { "Migrant/refugee-led organisations": "Migrant- and refugee-led organisations", "Open / multiple audiences": "Open to multiple audiences", "Open / mixed": "Open with deadline", "Rolling / open": "Rolling / ongoing", "No date listed": "Deadline not listed", "Archive": "Archived opportunities" }; return labels[value] || value; } function fillSelect(id, label, values) {
   const select = document.getElementById(id);
   select.innerHTML = "";
   const all = document.createElement("option");
@@ -1742,7 +1880,7 @@ function fillSelect(id, label, values) {
     if (!value) return;
     const option = document.createElement("option");
     option.value = value;
-    option.textContent = value;
+    option.textContent = mocFilterLabel(value);
     select.appendChild(option);
   });
 }
@@ -1764,7 +1902,7 @@ function replaceFilterOptions(select, placeholder, options) {
   options.forEach(function(optionValue) {
     const option = document.createElement("option");
     option.value = optionValue;
-    option.textContent = optionValue;
+    option.textContent = mocFilterLabel(optionValue);
     select.appendChild(option);
   });
 
@@ -1867,7 +2005,7 @@ function toggleSummary(button) {
   const summaryNode = button.previousElementSibling;
   if (!summaryNode || !summaryNode.classList.contains("summary")) return;
   const expanded = summaryNode.classList.toggle("summary-expanded");
-  button.textContent = expanded ? "Show less" : "More details";
+  button.textContent = expanded ? "Show less" : "Show more";
   button.setAttribute("aria-expanded", String(expanded));
 }
 
@@ -1882,55 +2020,147 @@ function renderCard(row) {
   const summary = htmlEscape(rowSummary(row));
   const url = htmlEscape(rowUrl(row));
   const id = htmlEscape(rowId(row));
-  const deadlineClass = deadlineGroup === "Closing soon"
-    ? " deadline-closing"
-    : deadlineGroup === "Archive"
-      ? " deadline-archive"
-      : "";
+  const technicalId = htmlEscape(first(row, ["technical_identifier"]));
+  const technicalIdLabel = htmlEscape(first(row, ["technical_identifier_label"]));
+  const statusChipClass = ({
+    "Closing soon": "moc-chip--status-closing",
+    "Open / mixed": "moc-chip--status-deadline",
+    "Rolling / open": "moc-chip--status-rolling",
+    "No date listed": "moc-chip--status-nodate",
+    "Archive": "moc-chip--status-archive"
+  })[deadlineGroup];
+  if (!statusChipClass) throw new Error("Unknown deadline group: " + deadlineGroup);
 
   const audienceTags = audiences.slice(0, 2).map(function(audience) {
-    return '<span class="tag audience-tag">' + htmlEscape(audience) + '</span>';
+    return '<span class="tag audience-tag moc-chip moc-chip--audience">' + htmlEscape(audience) + '</span>';
   }).join("");
 
   const remainingAudienceTag = audiences.length > 2
-    ? '<span class="tag audience-more">+' + String(audiences.length - 2) + ' audiences</span>'
+    ? '<span class="tag audience-more moc-chip moc-chip--audience">+' + String(audiences.length - 2) + ' audiences</span>'
     : "";
 
   const locationTag = location
-    ? '<span class="tag">' + location + '</span>'
+    ? '<span class="tag moc-chip moc-chip--geography">' + location + '</span>'
     : "";
 
   const link = url
-    ? '<a href="' + url + '" target="_blank" rel="noopener noreferrer">Open source</a>'
+    ? '<a href="' + url + '" target="_blank" rel="noopener noreferrer">View opportunity</a>'
     : "";
 
   const summaryBlock = summary
     ? '<div class="summary">' + summary + '</div>' +
-      '<button class="summary-toggle" type="button" aria-expanded="false" onclick="toggleSummary(this)">More details</button>'
+      '<button class="summary-toggle" type="button" aria-expanded="false" onclick="toggleSummary(this)">Show more</button>'
     : "";
 
   return '<article class="card" data-moc-type="' + type + '" data-moc-deadline-group="' + htmlEscape(deadlineGroup) + '">' +
     '<h2>' + title + '</h2>' +
     '<div class="source">' + source + '</div>' +
     '<div class="tags">' +
-      '<span class="tag type-tag">' + type + '</span>' +
+      '<span class="tag type-tag moc-chip moc-chip--type">' + type + '</span>' +
       audienceTags +
       remainingAudienceTag +
       locationTag +
-      '<span class="tag' + deadlineClass + '">' + deadline + '</span>' +
+      '<span class="tag moc-chip moc-chip--status ' + statusChipClass + '">' + deadline + '</span>' +
     '</div>' +
-    '<div class="idline">ID: ' + id + '</div>' +
+    '<div class="idline">' +
+      (technicalId ? '<span class="technical-id">' + technicalIdLabel + ': ' + technicalId + '</span>' : '') +
+      '<span class="moc-id">ID: ' + id + '</span></div>' +
     summaryBlock +
     link +
   '</article>';
 }
 
+function mocClearFilterV14(id) {
+  const control = document.getElementById(id);
+  if (!control) return;
+  control.value = "";
+  render();
+}
+
+function mocClearAllFiltersV14() {
+  ["typeFilter", "audienceFilter", "locationFilter", "deadlineFilter"].forEach(function(id) {
+    const control = document.getElementById(id);
+    if (control) control.value = "";
+  });
+  render();
+}
+
+function renderAppliedFiltersV14(state) {
+  const node = document.getElementById("moc-applied-filters-v14");
+  if (!node) return;
+
+  const definitions = [
+    { id: "typeFilter", label: "Type", value: state.typeValue },
+    { id: "audienceFilter", label: "Audience", value: state.audienceValue },
+    { id: "locationFilter", label: "Location", value: state.locationValue },
+    { id: "deadlineFilter", label: "Status", value: state.deadlineValue }
+  ];
+  const active = definitions.filter(function(item) {
+    return Boolean(item.value);
+  });
+
+  if (active.length === 0) {
+    node.hidden = true;
+    node.innerHTML = "";
+    return;
+  }
+
+  const chips = active.map(function(item) {
+    const semanticClass = item.id === "deadlineFilter" ? mocStatusClassV15(item.value) : "";
+    return '<span class="moc-applied-chip-v14 ' + semanticClass + '">' +
+      '<strong>' + htmlEscape(item.label) + ':</strong> ' +
+      htmlEscape(item.value) +
+      '<button class="moc-applied-remove-v14" type="button" aria-label="Remove ' +
+      htmlEscape(item.label) + ' filter" onclick="mocClearFilterV14(\'' +
+      item.id + '\')">×</button></span>';
+  }).join("");
+
+  node.hidden = false;
+  node.innerHTML =
+    '<span class="moc-applied-label-v14">Filtered by</span>' +
+    chips +
+    '<button class="moc-applied-clear-v14" type="button" onclick="mocClearAllFiltersV14()">Clear all</button>';
+}
+function updateStatusSemanticV15(value) {
+  const el = document.getElementById("deadlineFilter");
+  if (!el) return;
+  el.classList.remove(
+    "moc-status-v15-default",
+    "moc-status-v15-open",
+    "moc-status-v15-closing",
+    "moc-status-v15-neutral"
+  );
+
+  if (!value) {
+    el.classList.add("moc-status-v15-default");
+  } else if (value === "Closing soon") {
+    el.classList.add("moc-status-v15-closing");
+  } else if (value === "Open / mixed" || value === "Rolling / open") {
+    el.classList.add("moc-status-v15-open");
+  } else {
+    el.classList.add("moc-status-v15-neutral");
+  }
+}
+
+function mocStatusClassV15(value) {
+  if (value === "Closing soon") return "moc-status-v15-closing";
+  if (value === "Open / mixed" || value === "Rolling / open") return "moc-status-v15-open";
+  if (value) return "moc-status-v15-neutral";
+  return "";
+}
 function render() {
   const searchValue = document.getElementById("search").value.trim().toLowerCase();
   const typeValue = document.getElementById("typeFilter").value;
   const audienceValue = document.getElementById("audienceFilter").value;
   const locationValue = document.getElementById("locationFilter").value;
   const deadlineValue = document.getElementById("deadlineFilter").value;
+  updateStatusSemanticV15(deadlineValue);
+  renderAppliedFiltersV14({
+    typeValue: typeValue,
+    audienceValue: audienceValue,
+    locationValue: locationValue,
+    deadlineValue: deadlineValue
+  });
 
   const currentRows = DATA.filter(function(row) {
     return normalizeDeadline(row) !== "Archive";
@@ -1963,6 +2193,7 @@ function render() {
     ]);
     const searchText = [
       rowTitle(row),
+      row.title,
       rowSource(row),
       rowSummary(row),
       rowId(row),
@@ -2022,8 +2253,1259 @@ async function initialize() {
 
 initialize();
 </script>
+<style id="moc-visual-refresh-v9-r1">
+:root{
+  --moc-shell:1540px;
+  --moc-gutter:clamp(30px,3.5vw,58px);
+  --moc-green:#2f6f5d;
+  --moc-green-deep:#214f40;
+  --moc-green-border:rgba(47,111,93,.24);
+  --moc-green-border-strong:rgba(47,111,93,.50);
+  --moc-green-active:rgba(47,111,93,.14);
+  --moc-green-active-strong:rgba(47,111,93,.19);
+  --moc-green-faint:rgba(47,111,93,.035);
+  --moc-urgent:#a8632f;
+  --moc-urgent-soft:rgba(168,99,47,.10);
+  --moc-shadow-soft:0 10px 30px rgba(69,53,40,.075);
+  --moc-shadow-hover:0 18px 44px rgba(69,53,40,.13);
+  --moc-shadow-active:0 12px 28px rgba(47,111,93,.14);
+}
+.moc-v9r1-shell{
+  width:min(var(--moc-shell),calc(100% - (2 * var(--moc-gutter))))!important;
+  max-width:var(--moc-shell)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+/* Centered editorial hero retained. */
+.moc-v9r1-hero{
+  padding-top:clamp(34px,3.2vw,50px)!important;
+  padding-bottom:clamp(28px,2.8vw,42px)!important;
+  text-align:center!important;
+}
+.moc-v9r1-hero h1{
+  margin-left:auto!important;
+  margin-right:auto!important;
+  margin-bottom:14px!important;
+  font-size:clamp(42px,3.65vw,62px)!important;
+  line-height:1!important;
+  letter-spacing:-.025em!important;
+  max-width:none!important;
+}
+.moc-v9r1-hero p{
+  margin-left:auto!important;
+  margin-right:auto!important;
+  max-width:820px!important;
+  line-height:1.5!important;
+  opacity:.82;
+}
+.moc-v9r1-hero::after{
+  content:"";
+  display:block;
+  width:58px;
+  height:2px;
+  margin:20px auto 0;
+  border-radius:999px;
+  background:rgba(47,111,93,.48);
+}
+@media(min-width:1160px){
+  .moc-v9r1-hero h1{white-space:nowrap!important;}
+}
+
+/* Active/filter states retained, with distinct hover / focus / selected hierarchy. */
+.moc-v9r1-filters{
+  gap:clamp(10px,1vw,16px)!important;
+  padding-top:22px!important;
+  padding-bottom:22px!important;
+}
+.moc-v9r1-filters select,
+.moc-v9r1-filters input[type="search"],
+.moc-v9r1-filters input[placeholder*="Search"],
+.moc-v9r1-filters input[aria-label*="Search"]{
+  border:1px solid rgba(47,111,93,.21)!important;
+  background:rgba(255,255,255,.95)!important;
+  transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease,color .18s ease,transform .18s ease;
+}
+.moc-v9r1-filters select:hover,
+.moc-v9r1-filters input[type="search"]:hover,
+.moc-v9r1-filters input[placeholder*="Search"]:hover{
+  border-color:rgba(47,111,93,.40)!important;
+  background:rgba(255,255,255,1)!important;
+}
+.moc-v9r1-filters select:focus,
+.moc-v9r1-filters input[type="search"]:focus,
+.moc-v9r1-filters input[placeholder*="Search"]:focus{
+  outline:none!important;
+  transform:translateY(-2px);
+  border-color:rgba(47,111,93,.72)!important;
+  background:rgba(47,111,93,.055)!important;
+  box-shadow:0 0 0 4px rgba(47,111,93,.11),0 8px 20px rgba(47,111,93,.09)!important;
+}
+.moc-v9r1-active-filter{
+  border-color:rgba(47,111,93,.62)!important;
+  background:var(--moc-green-active)!important;
+  color:var(--moc-green-deep)!important;
+  font-weight:600!important;
+  box-shadow:inset 0 0 0 1px rgba(47,111,93,.06),0 4px 12px rgba(47,111,93,.055)!important;
+}
+.moc-v9r1-active-filter:hover{
+  background:var(--moc-green-active-strong)!important;
+  border-color:rgba(47,111,93,.72)!important;
+}
+
+/* Stats retained. */
+.moc-v9r1-stat-grid{
+  gap:clamp(14px,1.25vw,20px)!important;
+  margin-top:clamp(26px,2.2vw,38px)!important;
+  margin-bottom:clamp(40px,3vw,54px)!important;
+}
+.moc-stat-card{
+  min-height:118px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  text-align:center!important;
+  padding:24px 22px!important;
+  border:1px solid var(--moc-green-border)!important;
+  background:linear-gradient(180deg,var(--moc-green-faint),rgba(47,111,93,0) 72%),rgba(255,255,255,.68)!important;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.moc-stat-card:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--moc-shadow-soft);
+  border-color:var(--moc-green-border-strong)!important;
+}
+.moc-stat-number{display:block!important;margin-bottom:9px!important;line-height:.9!important;}
+.moc-stat-label{
+  display:block!important;
+  text-transform:uppercase!important;
+  letter-spacing:.085em!important;
+  font-size:.76em!important;
+  line-height:1.25!important;
+  opacity:.72;
+}
+
+/* True result grid. */
+.moc-v9r1-results{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:clamp(18px,1.45vw,24px)!important;
+  align-items:start!important;
+  padding-bottom:48px!important;
+}
+.moc-v9r1-results.moc-v9r1-one{
+  grid-template-columns:minmax(0,720px)!important;
+  justify-content:center!important;
+}
+.moc-v9r1-results.moc-v9r1-two{
+  grid-template-columns:repeat(2,minmax(0,560px))!important;
+  justify-content:center!important;
+}
+.moc-opportunity-card-polish{
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  border:1px solid var(--moc-green-border)!important;
+  transition:transform .20s ease,box-shadow .20s ease,border-color .20s ease,background-color .20s ease;
+}
+.moc-opportunity-card-polish:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--moc-shadow-hover);
+  border-color:var(--moc-green-border-strong)!important;
+}
+.moc-opportunity-card-polish:focus-within,
+.moc-card-expanded{
+  border-color:rgba(47,111,93,.60)!important;
+  background:linear-gradient(180deg,rgba(47,111,93,.05),rgba(255,255,255,0) 38%)!important;
+  box-shadow:0 0 0 3px rgba(47,111,93,.08),var(--moc-shadow-soft);
+}
+.moc-card-pressed{
+  transform:translateY(-1px) scale(.992)!important;
+  border-color:rgba(47,111,93,.74)!important;
+  box-shadow:var(--moc-shadow-active)!important;
+}
+
+/* Native zero-results message gets polished instead of competing with a duplicate. */
+.moc-v9r1-native-empty{
+  max-width:760px!important;
+  margin:34px auto 54px!important;
+  padding:44px 36px!important;
+  border:1px dashed rgba(47,111,93,.38)!important;
+  border-radius:18px!important;
+  background:rgba(47,111,93,.038)!important;
+  text-align:center!important;
+  font-size:1.18rem!important;
+  font-weight:700!important;
+  color:var(--moc-green-deep)!important;
+  line-height:1.35!important;
+}
+.moc-v9r1-native-empty::after{
+  content:"Try broadening one of the selected filters or clear the search field.";
+  display:block;
+  max-width:520px;
+  margin:9px auto 0;
+  font-size:.86rem;
+  font-weight:400;
+  line-height:1.5;
+  color:rgba(47,41,36,.68);
+}
+
+/* Meaningful status colour only. */
+.moc-pill-closing{
+  background:var(--moc-urgent-soft)!important;
+  border-color:rgba(168,99,47,.30)!important;
+  color:#7f4721!important;
+}
+.moc-pill-rolling{
+  background:rgba(47,111,93,.08)!important;
+  border-color:rgba(47,111,93,.26)!important;
+  color:#285f50!important;
+}
+.moc-pill-nodate{
+  background:rgba(126,113,98,.06)!important;
+  border-color:rgba(126,113,98,.18)!important;
+}
+
+/* Motion is visible but still calm. */
+@keyframes mocV9R1CardIn{from{opacity:.36;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.moc-v9r1-enter{animation:mocV9R1CardIn .28s cubic-bezier(.2,.65,.3,1) both;}
+@keyframes mocV9R1CountPulse{0%{transform:scale(1);opacity:1}44%{transform:scale(1.06);opacity:.80}100%{transform:scale(1);opacity:1}}
+.moc-v9r1-count-pulse{animation:mocV9R1CountPulse .26s ease-out both;}
+@keyframes mocV9R1FilterConfirm{0%{box-shadow:0 0 0 0 rgba(47,111,93,0)}48%{box-shadow:0 0 0 5px rgba(47,111,93,.14)}100%{box-shadow:0 0 0 0 rgba(47,111,93,0)}}
+.moc-v9r1-filter-confirm{animation:mocV9R1FilterConfirm .34s ease-out both;}
+
+@media(max-width:1180px){
+  .moc-v9r1-results:not(.moc-v9r1-one){grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+}
+@media(max-width:760px){
+  :root{--moc-gutter:16px}
+  .moc-v9r1-results,.moc-v9r1-results.moc-v9r1-one,.moc-v9r1-results.moc-v9r1-two{grid-template-columns:1fr!important;}
+  .moc-v9r1-hero h1{font-size:clamp(38px,10vw,52px)!important;white-space:normal!important;}
+  .moc-stat-card{min-height:106px!important;padding:20px 18px!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  .moc-stat-card,.moc-opportunity-card-polish,.moc-v9r1-filters select,.moc-v9r1-filters input{transition:none!important;}
+  .moc-stat-card:hover,.moc-opportunity-card-polish:hover,.moc-v9r1-filters select:focus,.moc-v9r1-filters input:focus{transform:none!important;}
+  .moc-v9r1-enter,.moc-v9r1-count-pulse,.moc-v9r1-filter-confirm{animation:none!important;}
+}
+</style>
+<script id="moc-visual-refresh-v9-r1-script">
+(() => {
+  const clean = el => (el?.textContent || "").replace(/\s+/g," ").trim();
+
+  function depth(el){
+    let d=0;
+    for(let n=el;n;n=n.parentElement) d++;
+    return d;
+  }
+
+  function findCard(el,minHeight){
+    let node=el;
+    for(let i=0;node && i<8;i++,node=node.parentElement){
+      if(!(node instanceof HTMLElement)) continue;
+      const r=node.getBoundingClientRect();
+      const cs=getComputedStyle(node);
+      const radius=parseFloat(cs.borderTopLeftRadius)||0;
+      if(r.width>220 && r.height>=minHeight && radius>=10) return node;
+    }
+    return null;
+  }
+
+  function opportunityCards(){
+    const found=new Set();
+    for(const el of document.querySelectorAll("article,section,div")){
+      if(!/\bID:\s*MOC-\d+/i.test(clean(el))) continue;
+      const card=findCard(el,180);
+      if(card) found.add(card);
+    }
+    return Array.from(found);
+  }
+
+  function visibleCards(){
+    return opportunityCards().filter(card=>{
+      const cs=getComputedStyle(card);
+      const r=card.getBoundingClientRect();
+      return cs.display!=="none" && cs.visibility!=="hidden" && r.width>0 && r.height>0;
+    });
+  }
+
+  /* Find the deepest actual layout ancestor containing every result card.
+     Prefer an ancestor already rendered as grid/flex; fall back to deepest common ancestor. */
+  function findTrueResultGrid(){
+    const cards=opportunityCards();
+    if(!cards.length) return null;
+
+    const candidates=new Map();
+    for(const card of cards){
+      let node=card.parentElement;
+      let distance=1;
+      while(node && node!==document.body && distance<=7){
+        if(!candidates.has(node)) candidates.set(node,{count:0,totalDistance:0});
+        const row=candidates.get(node);
+        row.count++;
+        row.totalDistance+=distance;
+        node=node.parentElement;
+        distance++;
+      }
+    }
+
+    const full=[];
+    for(const [node,row] of candidates){
+      if(row.count!==cards.length) continue;
+      const display=getComputedStyle(node).display;
+      let mode=0;
+      if(display==="grid" || display==="inline-grid") mode=3;
+      else if(display==="flex" || display==="inline-flex") mode=2;
+      else mode=1;
+      full.push({node,row,mode,depth:depth(node)});
+    }
+    if(!full.length) return null;
+
+    full.sort((a,b)=>{
+      if(b.mode!==a.mode) return b.mode-a.mode;
+      if(b.depth!==a.depth) return b.depth-a.depth;
+      return a.row.totalDistance-b.row.totalDistance;
+    });
+    return full[0].node;
+  }
+
+  function statRows(){
+    return [
+      ["openCount","moc-stat-current"],
+      ["closingSoonCount","moc-stat-closing"],
+      ["archiveCount","moc-stat-archived"],
+      ["totalCount","moc-stat-tracked"]
+    ].map(([id,className])=>{
+      const number=document.getElementById(id);
+      const card=number?.closest(".stat");
+      const labelEl=card?.querySelector(".label");
+      if(!card || !labelEl) return null;
+      card.classList.add(className);
+      return {card,labelEl,number};
+    }).filter(Boolean);
+  }
+
+  function commonAncestor(elements){
+    const els=elements.filter(Boolean);
+    if(!els.length) return null;
+    let node=els[0];
+    while(node && node!==document.body){
+      if(els.every(el=>node.contains(el))) return node;
+      node=node.parentElement;
+    }
+    return null;
+  }
+
+  function tagHeroAndFilters(){
+    const h1=Array.from(document.querySelectorAll("h1")).find(el=>clean(el)==="Migration Opportunity Calendar");
+    if(h1){
+      let hero=h1.parentElement;
+      for(let i=0;hero && i<4;i++){
+        const r=hero.getBoundingClientRect();
+        if(r.width>window.innerWidth*.62 && r.height<340) break;
+        hero=hero.parentElement;
+      }
+      if(hero && hero!==document.body) hero.classList.add("moc-v9r1-shell","moc-v9r1-hero");
+    }
+
+    const filterEls=[
+      document.querySelector('input[type="search"]') || document.querySelector('input[placeholder*="Search"]'),
+      document.getElementById("typeFilter"),
+      document.getElementById("audienceFilter"),
+      document.getElementById("locationFilter"),
+      document.getElementById("deadlineFilter")
+    ].filter(Boolean);
+    const fg=commonAncestor(filterEls);
+    if(fg && fg!==document.body) fg.classList.add("moc-v9r1-shell","moc-v9r1-filters");
+  }
+
+  function tagStats(){
+    const rows=statRows();
+    rows.forEach(row=>{
+      row.card.classList.add("moc-stat-card");
+      row.labelEl.classList.add("moc-stat-label");
+      row.number.classList.add("moc-stat-number");
+    });
+    const grid=commonAncestor(rows.map(r=>r.card));
+    if(grid && grid!==document.body) grid.classList.add("moc-v9r1-shell","moc-v9r1-stat-grid");
+  }
+
+  function tagCardsAndGrid(){
+    const cards=opportunityCards();
+    cards.forEach(card=>card.classList.add("moc-opportunity-card-polish"));
+    const grid=findTrueResultGrid();
+    if(grid) grid.classList.add("moc-v9r1-shell","moc-v9r1-results");
+    return grid;
+  }
+
+  function findNativeEmpty(){
+    const hits=Array.from(document.querySelectorAll("p,div,section,span"))
+      .filter(el=>clean(el)==="No opportunities match these filters.");
+    if(!hits.length) return null;
+    hits.sort((a,b)=>a.children.length-b.children.length);
+    return hits[0];
+  }
+
+  function polishNativeEmpty(){
+    const empty=findNativeEmpty();
+    if(empty) empty.classList.add("moc-v9r1-native-empty");
+  }
+
+  function updateAdaptiveLayout(){
+    const grid=tagCardsAndGrid();
+    if(!grid) return;
+    const n=visibleCards().length;
+    grid.classList.remove("moc-v9r1-one","moc-v9r1-two","moc-v9r1-many");
+    if(n===1) grid.classList.add("moc-v9r1-one");
+    else if(n===2) grid.classList.add("moc-v9r1-two");
+    else grid.classList.add("moc-v9r1-many");
+  }
+
+  function updateFilterStates(){
+    const search=document.querySelector('input[type="search"]') || document.querySelector('input[placeholder*="Search"]');
+    if(search) search.classList.toggle("moc-v9r1-active-filter",search.value.trim().length>0);
+    for(const id of ["typeFilter","audienceFilter","locationFilter","deadlineFilter"]){
+      const el=document.getElementById(id);
+      if(el) el.classList.toggle("moc-v9r1-active-filter",el.value!=="");
+    }
+  }
+
+  function animateVisible(){
+    visibleCards().forEach((card,i)=>{
+      card.classList.remove("moc-v9r1-enter");
+      card.style.animationDelay=Math.min(i,8)*20+"ms";
+      void card.offsetWidth;
+      card.classList.add("moc-v9r1-enter");
+    });
+  }
+
+  function pulseStats(){
+    statRows().forEach(row=>{
+      const number=Array.from(row.card.querySelectorAll("div,span,p,strong")).find(el=>/^\d+$/.test(clean(el)));
+      if(!number) return;
+      number.classList.remove("moc-v9r1-count-pulse");
+      void number.offsetWidth;
+      number.classList.add("moc-v9r1-count-pulse");
+    });
+  }
+
+  function confirmFilter(el){
+    el.classList.remove("moc-v9r1-filter-confirm");
+    void el.offsetWidth;
+    el.classList.add("moc-v9r1-filter-confirm");
+  }
+
+  function bindCardFeedback(){
+    for(const card of opportunityCards()){
+      if(card.dataset.mocV9R1Bound==="1") continue;
+      card.dataset.mocV9R1Bound="1";
+      card.addEventListener("pointerdown",()=>card.classList.add("moc-card-pressed"));
+      const clear=()=>card.classList.remove("moc-card-pressed");
+      card.addEventListener("pointerup",clear);
+      card.addEventListener("pointercancel",clear);
+      card.addEventListener("pointerleave",clear);
+      for(const details of card.querySelectorAll("details")){
+        details.addEventListener("toggle",()=>card.classList.toggle("moc-card-expanded",details.open));
+        if(details.open) card.classList.add("moc-card-expanded");
+      }
+    }
+  }
+
+  function apply(){
+    tagHeroAndFilters();
+    tagStats();
+    tagCardsAndGrid();
+    polishNativeEmpty();
+    updateFilterStates();
+    bindCardFeedback();
+    updateAdaptiveLayout();
+  }
+
+  let timer=null;
+  function refresh(source){
+    clearTimeout(timer);
+    if(source) confirmFilter(source);
+    timer=setTimeout(()=>{
+      apply();
+      updateAdaptiveLayout();
+      animateVisible();
+      pulseStats();
+    },75);
+  }
+
+  function bindFilters(){
+    for(const el of document.querySelectorAll("select,input[type='search'],input[placeholder*='Search']")){
+      if(el.dataset.mocV9R1FilterBound==="1") continue;
+      el.dataset.mocV9R1FilterBound="1";
+      const eventName=el.tagName==="SELECT"?"change":"input";
+      el.addEventListener(eventName,()=>refresh(el),{passive:true});
+    }
+  }
+
+  function boot(){
+    apply();
+    bindFilters();
+    setTimeout(()=>{apply();animateVisible();},150);
+    setTimeout(()=>{apply();bindFilters();},750);
+    setTimeout(()=>{apply();bindFilters();},1800);
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot,{once:true});
+  else boot();
+})();
+</script>
+<style id="moc-visual-refresh-v9-r2">
+/* Bind the adaptive layout to the renderer's actual container: #cards. */
+#cards{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:clamp(18px,1.45vw,24px)!important;
+  align-items:start!important;
+}
+#cards.moc-r2-one{
+  grid-template-columns:minmax(0,720px)!important;
+  justify-content:center!important;
+}
+#cards.moc-r2-two{
+  grid-template-columns:repeat(2,minmax(0,560px))!important;
+  justify-content:center!important;
+}
+#cards.moc-r2-zero{
+  grid-template-columns:minmax(0,760px)!important;
+  justify-content:center!important;
+}
+
+/* Polish the renderer's native empty state instead of adding a duplicate. */
+#cards > .empty{
+  width:100%!important;
+  max-width:760px!important;
+  min-height:220px!important;
+  margin:20px auto 34px!important;
+  padding:44px 36px!important;
+  border:1px dashed rgba(47,111,93,.38)!important;
+  border-radius:18px!important;
+  background:rgba(47,111,93,.038)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  color:#214f40!important;
+  font-size:1.18rem!important;
+  font-weight:700!important;
+  line-height:1.35!important;
+}
+#cards > .empty::after{
+  content:"Try broadening one of the selected filters or clear the search field.";
+  display:block;
+  max-width:520px;
+  margin:9px auto 0;
+  color:rgba(47,41,36,.68);
+  font-size:.86rem;
+  font-weight:400;
+  line-height:1.5;
+}
+
+/* Show more must exist visually only when the collapsed summary really overflows. */
+.summary-toggle[hidden]{
+  display:none!important;
+}
+
+@media(max-width:1180px){
+  #cards:not(.moc-r2-one):not(.moc-r2-zero){
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:760px){
+  #cards,
+  #cards.moc-r2-one,
+  #cards.moc-r2-two,
+  #cards.moc-r2-zero{
+    grid-template-columns:1fr!important;
+  }
+}
+</style>
+<script id="moc-visual-refresh-v9-r2-script">
+(() => {
+  const cards = document.getElementById("cards");
+  if (!cards) return;
+
+  function directArticles(){
+    return Array.from(cards.children).filter(el => el.tagName === "ARTICLE");
+  }
+
+  function visibleArticles(){
+    return directArticles().filter(card => {
+      const cs = getComputedStyle(card);
+      const r = card.getBoundingClientRect();
+      return cs.display !== "none" && cs.visibility !== "hidden" && r.width > 0 && r.height > 0;
+    });
+  }
+
+  function syncAdaptiveGrid(){
+    const n = visibleArticles().length;
+    const hasEmpty = !!cards.querySelector(":scope > .empty");
+    cards.classList.remove("moc-r2-zero","moc-r2-one","moc-r2-two","moc-r2-many");
+    if (hasEmpty || n === 0) cards.classList.add("moc-r2-zero");
+    else if (n === 1) cards.classList.add("moc-r2-one");
+    else if (n === 2) cards.classList.add("moc-r2-two");
+    else cards.classList.add("moc-r2-many");
+  }
+
+  function toggleIsExpanded(toggle){
+    const text = (toggle.textContent || "").trim().toLowerCase();
+    return text.includes("show less") ||
+           text.includes("less") ||
+           toggle.getAttribute("aria-expanded") === "true";
+  }
+
+  function syncSummaryToggle(card){
+    const summary = card.querySelector(".summary");
+    const toggle = card.querySelector(".summary-toggle");
+    if (!summary || !toggle) return;
+
+    /* Never hide the control while the user is in the expanded state. */
+    if (toggleIsExpanded(toggle)) {
+      toggle.hidden = false;
+      toggle.dataset.mocOverflow = "1";
+      return;
+    }
+
+    /* Measure the ACTUAL collapsed rendered box. */
+    toggle.hidden = false;
+    const overflow = summary.scrollHeight > summary.clientHeight + 2;
+    toggle.dataset.mocOverflow = overflow ? "1" : "0";
+    toggle.hidden = !overflow;
+  }
+
+  function syncAllSummaryToggles(){
+    directArticles().forEach(syncSummaryToggle);
+  }
+
+  function syncAll(){
+    syncAdaptiveGrid();
+    syncAllSummaryToggles();
+  }
+
+  let scheduled = false;
+  function scheduleSync(){
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      syncAll();
+      requestAnimationFrame(syncAll);
+    });
+  }
+
+  /* The renderer replaces #cards.innerHTML after each filter. */
+  const observer = new MutationObserver(scheduleSync);
+  observer.observe(cards,{childList:true,subtree:true});
+
+  /* Width changes can change whether a summary truly overflows. */
+  if ("ResizeObserver" in window) {
+    const ro = new ResizeObserver(scheduleSync);
+    ro.observe(cards);
+  } else {
+    window.addEventListener("resize",scheduleSync,{passive:true});
+  }
+
+  for (const el of document.querySelectorAll("select,input[type='search'],input[placeholder*='Search']")) {
+    el.addEventListener(el.tagName === "SELECT" ? "change" : "input", scheduleSync, {passive:true});
+  }
+
+  cards.addEventListener("click", event => {
+    if (event.target.closest(".summary-toggle")) {
+      setTimeout(scheduleSync,0);
+    }
+  });
+
+  scheduleSync();
+  setTimeout(scheduleSync,100);
+  setTimeout(scheduleSync,500);
+})();
+</script>
+<style id="moc-visual-refresh-v9-r3">
+/* Stronger hover: clearly noticeable, still calm and editorial. */
+#cards > article.moc-opportunity-card-polish{
+  position:relative;
+  transform-origin:center center;
+  transition:
+    transform .19s cubic-bezier(.2,.65,.3,1),
+    box-shadow .19s ease,
+    border-color .19s ease,
+    background .19s ease;
+}
+
+#cards > article.moc-opportunity-card-polish:hover{
+  transform:translateY(-7px);
+  border-color:rgba(47,111,93,.62)!important;
+  background:
+    linear-gradient(180deg,rgba(47,111,93,.065),rgba(47,111,93,.012) 42%,rgba(255,255,255,0) 100%)!important;
+  box-shadow:
+    0 22px 52px rgba(69,53,40,.16),
+    0 0 0 1px rgba(47,111,93,.05)!important;
+}
+
+/* A soft green rail appears only while the card is being inspected. */
+#cards > article.moc-opportunity-card-polish::before{
+  content:"";
+  position:absolute;
+  top:18px;
+  bottom:18px;
+  left:-1px;
+  width:3px;
+  border-radius:0 3px 3px 0;
+  background:rgba(47,111,93,0);
+  transition:background .19s ease;
+  pointer-events:none;
+}
+#cards > article.moc-opportunity-card-polish:hover::before,
+#cards > article.moc-opportunity-card-polish:focus-within::before{
+  background:rgba(47,111,93,.56);
+}
+
+/* Press feedback remains distinct from hover. */
+#cards > article.moc-opportunity-card-polish.moc-card-pressed{
+  transform:translateY(-2px) scale(.992)!important;
+  border-color:rgba(47,111,93,.78)!important;
+  box-shadow:0 10px 26px rgba(47,111,93,.15)!important;
+}
+
+/* Real click targets are more explicit than the surrounding card. */
+#cards > article .summary-toggle,
+#cards > article a{
+  transition:
+    color .15s ease,
+    background-color .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+}
+
+#cards > article .summary-toggle:hover,
+#cards > article a:hover{
+  color:#214f40!important;
+  background:rgba(47,111,93,.085)!important;
+  text-decoration-color:rgba(47,111,93,.68)!important;
+}
+
+#cards > article .summary-toggle:hover{
+  transform:translateY(-1px);
+}
+
+#cards > article .summary-toggle:focus-visible,
+#cards > article a:focus-visible{
+  outline:none!important;
+  box-shadow:0 0 0 3px rgba(47,111,93,.13)!important;
+  background:rgba(47,111,93,.10)!important;
+}
+
+/* Active filters remain persistent; hover/focus become a little stronger. */
+.moc-v9r1-active-filter:hover{
+  background:rgba(47,111,93,.22)!important;
+  border-color:rgba(47,111,93,.78)!important;
+}
+.moc-v9r1-filters select:focus,
+.moc-v9r1-filters input[type="search"]:focus,
+.moc-v9r1-filters input[placeholder*="Search"]:focus{
+  box-shadow:
+    0 0 0 4px rgba(47,111,93,.14),
+    0 10px 24px rgba(47,111,93,.10)!important;
+}
+
+/* Keep V9-R2 1/2/0 result behavior authoritative. */
+#cards.moc-r2-one > article{
+  width:100%!important;
+}
+#cards.moc-r2-two > article{
+  width:100%!important;
+}
+
+/* Slightly clearer native empty state. */
+#cards > .empty{
+  box-shadow:inset 0 0 0 1px rgba(47,111,93,.025);
+}
+
+@media(prefers-reduced-motion:reduce){
+  #cards > article.moc-opportunity-card-polish,
+  #cards > article .summary-toggle,
+  #cards > article a{
+    transition:none!important;
+  }
+  #cards > article.moc-opportunity-card-polish:hover,
+  #cards > article.moc-opportunity-card-polish.moc-card-pressed,
+  #cards > article .summary-toggle:hover{
+    transform:none!important;
+  }
+}
+</style>
+<script id="moc-visual-refresh-v9-r3-script">
+(() => {
+  const cards = document.getElementById("cards");
+  if (!cards) return;
+
+  function syncProof(){
+    const articles = Array.from(cards.children).filter(el => el.tagName === "ARTICLE");
+    const visible = articles.filter(card => {
+      const cs = getComputedStyle(card);
+      const r = card.getBoundingClientRect();
+      return cs.display !== "none" && cs.visibility !== "hidden" && r.width > 0 && r.height > 0;
+    });
+
+    cards.dataset.mocVisibleResults = String(visible.length);
+    cards.dataset.mocAdaptiveState =
+      cards.classList.contains("moc-r2-zero") ? "zero" :
+      cards.classList.contains("moc-r2-one") ? "one" :
+      cards.classList.contains("moc-r2-two") ? "two" : "many";
+
+    let toggles = 0;
+    let hiddenToggles = 0;
+    for (const card of articles){
+      const toggle = card.querySelector(".summary-toggle");
+      if (!toggle) continue;
+      toggles++;
+      if (toggle.hidden) hiddenToggles++;
+    }
+    cards.dataset.mocSummaryToggles = String(toggles);
+    cards.dataset.mocHiddenSummaryToggles = String(hiddenToggles);
+  }
+
+  const observer = new MutationObserver(() => requestAnimationFrame(syncProof));
+  observer.observe(cards,{childList:true,subtree:true,attributes:true,attributeFilter:["class","hidden"]});
+
+  document.addEventListener("change",() => setTimeout(syncProof,90),true);
+  document.addEventListener("input",() => setTimeout(syncProof,90),true);
+  window.addEventListener("resize",() => requestAnimationFrame(syncProof),{passive:true});
+
+  syncProof();
+  setTimeout(syncProof,150);
+  setTimeout(syncProof,700);
+})();
+</script>
+<style id="moc-visual-refresh-v9-r4">
+:root{
+  /* Palette lock: keep the existing desaturated migration green. */
+  --moc-r4-green:#2f6f5d;
+  --moc-r4-green-deep:#214f40;
+  --moc-r4-hover-bg:rgba(47,111,93,.055);
+  --moc-r4-hover-border:rgba(47,111,93,.58);
+}
+
+/* Remove V9-R3's asymmetric left rail completely. */
+#cards > article.moc-opportunity-card-polish::before{
+  display:none!important;
+  content:none!important;
+}
+
+/* Balanced hover: every side participates equally. */
+#cards > article.moc-opportunity-card-polish:hover{
+  transform:translateY(-6px)!important;
+  border-color:var(--moc-r4-hover-border)!important;
+  background:
+    linear-gradient(180deg,var(--moc-r4-hover-bg),rgba(47,111,93,.012) 45%,rgba(255,255,255,0) 100%)!important;
+  box-shadow:
+    0 20px 46px rgba(69,53,40,.145),
+    inset 0 0 0 1px rgba(47,111,93,.10)!important;
+}
+
+/* Keyboard focus gets the same balanced treatment, plus a restrained ring. */
+#cards > article.moc-opportunity-card-polish:focus-within{
+  border-color:rgba(47,111,93,.64)!important;
+  box-shadow:
+    0 0 0 3px rgba(47,111,93,.095),
+    0 16px 38px rgba(69,53,40,.12),
+    inset 0 0 0 1px rgba(47,111,93,.08)!important;
+}
+
+/* Pressed state stays noticeable without looking like a button card. */
+#cards > article.moc-opportunity-card-polish.moc-card-pressed{
+  transform:translateY(-2px) scale(.994)!important;
+  border-color:rgba(47,111,93,.70)!important;
+  background:rgba(47,111,93,.045)!important;
+  box-shadow:
+    0 10px 24px rgba(47,111,93,.12),
+    inset 0 0 0 1px rgba(47,111,93,.10)!important;
+}
+
+/* Actual click targets remain stronger than the passive card hover. */
+#cards > article .summary-toggle:hover,
+#cards > article a:hover{
+  color:var(--moc-r4-green-deep)!important;
+  background:rgba(47,111,93,.105)!important;
+  text-decoration-color:rgba(47,111,93,.72)!important;
+}
+#cards > article .summary-toggle:focus-visible,
+#cards > article a:focus-visible{
+  outline:none!important;
+  background:rgba(47,111,93,.12)!important;
+  box-shadow:0 0 0 3px rgba(47,111,93,.14)!important;
+}
+
+/* Do not introduce any new accent family.
+   Terracotta remains reserved for genuinely imminent "Closes" pills. */
+
+@media(prefers-reduced-motion:reduce){
+  #cards > article.moc-opportunity-card-polish:hover,
+  #cards > article.moc-opportunity-card-polish.moc-card-pressed{
+    transform:none!important;
+  }
+}
+</style>
+<style id="moc-visual-refresh-v9-r5">
+/* Final polish only: no redesign. */
+.moc-last-updated{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:14px;
+  color:rgba(47,41,36,.62);
+  font-size:.82rem;
+  line-height:1.2;
+  letter-spacing:.02em;
+}
+.moc-last-updated::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#2f6f5d;
+  box-shadow:0 0 0 3px rgba(47,111,93,.08);
+  flex:0 0 auto;
+}
+
+/* V9-R4 hover was 6px. Final tune: 5px for a calmer editorial feel. */
+#cards > article.moc-opportunity-card-polish:hover{
+  transform:translateY(-5px)!important;
+}
+
+@media(max-width:760px){
+  .moc-last-updated{
+    margin-top:11px;
+    font-size:.78rem;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #cards > article.moc-opportunity-card-polish:hover{
+    transform:none!important;
+  }
+}
+</style>
+<script id="moc-last-updated-v1">
+(() => {
+  const h1 = Array.from(document.querySelectorAll("h1"))
+    .find(el => (el.textContent || "").trim() === "Migration Opportunity Calendar");
+  if (!h1) return;
+
+  const hero = h1.closest(".moc-v9r1-hero") || h1.parentElement;
+  if (!hero) return;
+
+  const subtitle = Array.from(hero.querySelectorAll("p"))
+    .find(el => (el.textContent || "").includes("Curated migration-related opportunities"));
+  if (!subtitle) return;
+
+  let line = hero.querySelector(".moc-last-updated");
+  if (!line) {
+    line = document.createElement("div");
+    line.className = "moc-last-updated";
+    subtitle.insertAdjacentElement("afterend", line);
+  }
+  line.textContent = "Last updated 30 Aug 2026";
+})();
+</script>
+<style id="moc-visual-refresh-v9-r5-r1">
+/* Final design lock: remove the decorative hero separator. */
+.moc-v9r1-hero::after,
+.moc-v9r1-hero:after{
+  display:none!important;
+  content:none!important;
+}
+
+/* Remove any provisional freshness row from V9-R5 by default.
+   It is re-enabled only if a SHA-bound authoritative timestamp was found. */
+.moc-last-updated{
+  display:none!important;
+}
+
+/* Final hover stays at 5px. */
+#cards > article.moc-opportunity-card-polish:hover{
+  transform:translateY(-5px)!important;
+}
+
+/* When authoritative freshness is proven, show a quiet metadata line only. */
+.moc-last-updated.moc-authoritative-freshness{
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:14px;
+  color:rgba(47,41,36,.62);
+  font-size:.82rem;
+  line-height:1.2;
+  letter-spacing:.02em;
+}
+.moc-last-updated.moc-authoritative-freshness::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#2f6f5d;
+  box-shadow:0 0 0 3px rgba(47,111,93,.08);
+  flex:0 0 auto;
+}
+@media(max-width:760px){
+  .moc-last-updated.moc-authoritative-freshness{
+    margin-top:11px;
+    font-size:.78rem;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #cards > article.moc-opportunity-card-polish:hover{
+    transform:none!important;
+  }
+}
+</style>
+<script id="moc-authoritative-freshness-v1">
+(() => {
+  const line = document.querySelector(".moc-last-updated");
+  if (line) line.remove();
+})();
+</script>
+<style id="moc-atomic-stats-ui-v1">
+/* Atomic stats hierarchy: two balanced pairs with an explicit group boundary. */
+.moc-v9r1-stat-grid{
+  grid-template-columns:
+    repeat(2,minmax(0,1fr))
+    clamp(32px,3.6vw,58px)
+    repeat(2,minmax(0,1fr))!important;
+  column-gap:clamp(14px,1.25vw,20px)!important;
+  align-items:stretch!important;
+}
+.moc-stat-current{grid-column:1}
+.moc-stat-closing{grid-column:2}
+.moc-stat-archived{grid-column:4}
+.moc-stat-tracked{grid-column:5}
+
+.moc-stat-current .moc-stat-label,
+.moc-stat-closing .moc-stat-label{
+  font-weight:600!important;
+  letter-spacing:.065em!important;
+  opacity:.82!important;
+}
+.moc-stat-archived .moc-stat-label,
+.moc-stat-tracked .moc-stat-label{
+  font-weight:400!important;
+  opacity:.66!important;
+}
+
+.moc-stat-current .moc-stat-number{
+  color:#2f6f5d!important;
+  transform-origin:center center;
+  animation:mocAtomicCurrentBreath 5.6s ease-in-out infinite!important;
+}
+.moc-stat-closing .moc-stat-number{color:var(--moc-urgent,#a8632f)!important}
+.moc-stat-archived .moc-stat-number{color:#7e7162!important}
+.moc-stat-tracked .moc-stat-number{color:#5f5a55!important}
+
+@keyframes mocAtomicCurrentBreath{
+  0%,100%{transform:scale(1);text-shadow:0 0 0 rgba(47,111,93,0)}
+  50%{transform:scale(1.012);text-shadow:0 0 10px rgba(47,111,93,.12)}
+}
+
+@media(max-width:900px){
+  .moc-v9r1-stat-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:clamp(14px,1.25vw,20px)!important;
+    row-gap:clamp(26px,4vw,34px)!important;
+  }
+  .moc-stat-current,
+  .moc-stat-closing,
+  .moc-stat-archived,
+  .moc-stat-tracked{grid-column:auto}
+}
+
+@media(max-width:620px){
+  .moc-v9r1-stat-grid{
+    grid-template-columns:1fr!important;
+    row-gap:clamp(14px,3.5vw,20px)!important;
+  }
+  .moc-stat-archived{margin-top:clamp(12px,3vw,18px)!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .moc-stat-current .moc-stat-number{
+    animation:none!important;
+    transform:none!important;
+    text-shadow:none!important;
+  }
+}
+</style>
+<style id="moc-public-display-semantics-v1">
+/* Secondary identifiers only; the frozen card and grid rules are untouched. */
+#cards > article .idline{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:3px;
+}
+#cards > article .technical-id{opacity:.88}
+#cards > article .moc-id{opacity:.76}
+</style>
+<style id="moc-semantic-chip-contract-v1">
+/* One token set per semantic family. No value-specific chip selectors. */
+#cards{
+  --moc-chip-type-bg:#fff9f0;
+  --moc-chip-type-border:#dfcbb6;
+  --moc-chip-audience-bg:rgba(47,111,93,.055);
+  --moc-chip-audience-border:rgba(47,111,93,.32);
+  --moc-chip-geography-bg:#fffdfa;
+  --moc-chip-geography-border:#decfbd;
+  --moc-chip-deadline-bg:#faf6ef;
+  --moc-chip-deadline-border:#ddcfbd;
+  --moc-chip-urgent-bg:var(--moc-urgent-soft);
+  --moc-chip-urgent-border:rgba(168,99,47,.36);
+  --moc-chip-rolling-bg:rgba(47,111,93,.075);
+  --moc-chip-rolling-border:rgba(47,111,93,.28);
+  --moc-chip-muted-bg:rgba(126,113,98,.07);
+  --moc-chip-muted-border:rgba(126,113,98,.24);
+}
+#cards > article .moc-chip{
+  display:inline-flex!important;
+  align-items:center!important;
+  font-family:inherit!important;
+  font-size:14px!important;
+  line-height:1.3!important;
+  padding:6px 10px!important;
+  border-radius:999px!important;
+  border-width:1px!important;
+  border-style:solid!important;
+  letter-spacing:normal!important;
+  text-transform:none!important;
+}
+#cards > article .moc-chip--type{
+  background:var(--moc-chip-type-bg)!important;
+  border-color:var(--moc-chip-type-border)!important;
+  color:#392f27!important;
+  font-weight:600!important;
+}
+#cards > article .moc-chip--audience{
+  background:var(--moc-chip-audience-bg)!important;
+  border-color:var(--moc-chip-audience-border)!important;
+  color:#2f4038!important;
+  font-weight:500!important;
+  opacity:1!important;
+}
+#cards > article .moc-chip--geography{
+  background:var(--moc-chip-geography-bg)!important;
+  border-color:var(--moc-chip-geography-border)!important;
+  color:#514940!important;
+  font-weight:400!important;
+}
+#cards > article .moc-chip--status{
+  font-weight:500!important;
+}
+#cards > article .moc-chip--status-deadline{
+  background:var(--moc-chip-deadline-bg)!important;
+  border-color:var(--moc-chip-deadline-border)!important;
+  color:#51463a!important;
+}
+#cards > article .moc-chip--status-closing{
+  background:var(--moc-chip-urgent-bg)!important;
+  border-color:var(--moc-chip-urgent-border)!important;
+  color:#7f4721!important;
+}
+#cards > article .moc-chip--status-rolling{
+  background:var(--moc-chip-rolling-bg)!important;
+  border-color:var(--moc-chip-rolling-border)!important;
+  color:#285f50!important;
+}
+#cards > article .moc-chip--status-nodate,
+#cards > article .moc-chip--status-archive{
+  background:var(--moc-chip-muted-bg)!important;
+  border-color:var(--moc-chip-muted-border)!important;
+  color:#625b53!important;
+}
+</style>
+<style id="moc-status-semantic-v15-r1">
+/* Final cascade override: status/deadline pills are intentionally semantic. */
+
+/* OPEN / ROLLING = GREEN OUTLINE */
+html body #cards > article .moc-chip.moc-chip--status.moc-chip--status-deadline,
+html body #cards > article .moc-chip.moc-chip--status.moc-chip--status-rolling{
+  background:#f3f8f5!important;
+  border-color:#5f947f!important;
+  border-width:1.5px!important;
+  color:#245f50!important;
+  box-shadow:inset 0 0 0 .5px rgba(47,111,93,.12)!important;
+  font-weight:600!important;
+}
+
+/* CLOSING SOON = TERRACOTTA / RED OUTLINE */
+html body #cards > article .moc-chip.moc-chip--status.moc-chip--status-closing{
+  background:#fcf2ec!important;
+  border-color:#bd6f4c!important;
+  border-width:1.5px!important;
+  color:#8a4527!important;
+  box-shadow:inset 0 0 0 .5px rgba(169,87,47,.14)!important;
+  font-weight:600!important;
+}
+
+/* NO DATE / ARCHIVE = NEUTRAL */
+html body #cards > article .moc-chip.moc-chip--status.moc-chip--status-nodate,
+html body #cards > article .moc-chip.moc-chip--status.moc-chip--status-archive{
+  background:#f5f2ee!important;
+  border-color:#d3c9be!important;
+  border-width:1px!important;
+  color:#655e57!important;
+  box-shadow:none!important;
+  font-weight:500!important;
+}
+
+/* Selected status filter mirrors the same semantics. */
+html body #deadlineFilter.moc-status-v15-open{
+  background:#fff!important;
+  color:#245f50!important;
+  border-color:#5f947f!important;
+  box-shadow:0 0 0 1px rgba(47,111,93,.12)!important;
+  font-weight:600!important;
+}
+html body #deadlineFilter.moc-status-v15-closing{
+  background:#fff!important;
+  color:#8a4527!important;
+  border-color:#bd6f4c!important;
+  box-shadow:0 0 0 1px rgba(169,87,47,.12)!important;
+  font-weight:600!important;
+}
+html body #deadlineFilter.moc-status-v15-neutral{
+  background:#fff!important;
+  color:#655e57!important;
+  border-color:#d3c9be!important;
+  box-shadow:none!important;
+}
+html body #deadlineFilter.moc-status-v15-default{
+  background:#fff!important;
+  color:var(--text)!important;
+  box-shadow:none!important;
+}
+
+/* Applied Status chip mirrors the same outline language. */
+html body .moc-applied-chip-v14.moc-status-v15-open{
+  background:#f3f8f5!important;
+  border-color:#5f947f!important;
+  color:#245f50!important;
+}
+html body .moc-applied-chip-v14.moc-status-v15-closing{
+  background:#fcf2ec!important;
+  border-color:#bd6f4c!important;
+  color:#8a4527!important;
+}
+html body .moc-applied-chip-v14.moc-status-v15-neutral{
+  background:#f5f2ee!important;
+  border-color:#d3c9be!important;
+  color:#655e57!important;
+}
+</style>
 </body>
 </html>
-
-
-
