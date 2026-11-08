@@ -387,7 +387,6 @@ input, select {
 </style>
 </head>
 <body>
-<div class="moc-local-candidate-banner">LOCAL REVIEW CANDIDATE - refined taxonomy, responsive cards and expandable details - not published</div>
 <header>
   <h1>Migration Opportunity Calendar</h1>
   <p class="subtitle">Curated migration-related opportunities, clear filters, and readable cards.</p>
@@ -398,7 +397,7 @@ input, select {
   <select id="typeFilter" aria-label="Filter by type"></select>
   <select id="audienceFilter" aria-label="Filter by audience"></select>
   <select id="locationFilter" aria-label="Filter by location"> <option value="">All locations</option> <option>Africa</option> <option>Americas</option> <option>Asia</option> <option>Europe</option> <option>Global</option> <option>Multiple regions</option> <option>Oceania</option> </select>
-  <select id="deadlineFilter" aria-label="Filter by status"> <option value="">All current opportunities</option> <option value="Closing soon">Closing soon</option> <option value="Open / mixed">Open with deadline</option> <option value="Rolling / open">Rolling / ongoing</option> <option value="No date listed">Deadline not listed</option> <option value="Archive">Archived opportunities</option> </select>
+  <select id="deadlineFilter" aria-label="Filter by status"> <option value="">All current opportunities</option> <option value="Closing soon">Closing soon</option> <option value="Open / mixed">Open with deadline</option> <option value="Rolling / open">Rolling / ongoing</option> <option value="No date listed">Deadline not listed</option> <option value="Review pending">Review pending (unverified)</option> <option value="Archive">Archived opportunities</option> </select>
 </section>
 <div id="moc-applied-filters-v14" class="moc-applied-filters-v14" aria-live="polite" hidden></div>
 
@@ -811,12 +810,12 @@ const EMBEDDED_DATA = [
         "provider": "EuroBrussels",
         "opportunity_type": "Jobs / internships",
         "deadline": "06 October 2026",
-        "deadline_parsed": "",
+        "deadline_parsed": "2026-10-06",
         "days_to_deadline": "",
         "geography": "Europe",
         "source_language": "en",
         "summary": "Save this Job Top Jobs Human Resources Manager - Brussels Funding Officer - Luxembourg Managing Director and Head of Brussels Office - Brussel...",
-        "status": "active",
+        "status": "archived",
         "source_url": "https://www.eurobrussels.com/job_display/291925/Senior_Policy_Officer_Passenger_CER_Community_of_European_Railway_and_Infrastructure_Companies_Brussels_Belgium",
         "target_group": ""
     },
@@ -1641,6 +1640,7 @@ function deadlineLabel(row) {
   if (group === "Closing soon") return publicDate ? "Closes " + publicDate : (raw ? "Closes " + raw : "Closing soon");
   if (group === "Open / mixed") return publicDate ? "Deadline " + publicDate : (raw ? "Deadline " + raw : "Open");
   if (group === "Rolling / open") return "Rolling / open";
+  if (group === "Review pending") return "Review pending - not verified";
   if (group === "No date listed") return "No deadline listed";
   return group || "Open";
 }
@@ -1675,7 +1675,10 @@ function deadlineDaysFromToday(row) {
   );
 }
 
+const MOC_PUBLIC_REVIEW_PENDING_IDS = new Set(["MOC-0094", "MOC-0161", "MOC-0165"]);
+
 function normalizeDeadline(row) {
+  if (MOC_PUBLIC_REVIEW_PENDING_IDS.has(rowId(row))) return "Review pending";
   const status = first(row, ["status", "deadline_status", "deadline_group", "deadline_category"]).toLowerCase();
   const deadlineText = first(row, ["deadline", "deadline_parsed"]).toLowerCase();
   const closedTerms = [
@@ -1975,7 +1978,7 @@ function getFilteredRows() {
     const deadlineValue = normalizeDeadline(row);
 
     if (deadline === "") {
-      if (deadlineValue === "Archive") return false;
+      if (deadlineValue === "Archive" || deadlineValue === "Review pending") return false;
     } else if (deadline !== deadlineValue) {
       return false;
     }
@@ -2027,6 +2030,7 @@ function renderCard(row) {
     "Open / mixed": "moc-chip--status-deadline",
     "Rolling / open": "moc-chip--status-rolling",
     "No date listed": "moc-chip--status-nodate",
+    "Review pending": "moc-chip--status-nodate",
     "Archive": "moc-chip--status-archive"
   })[deadlineGroup];
   if (!statusChipClass) throw new Error("Unknown deadline group: " + deadlineGroup);
@@ -2163,13 +2167,16 @@ function render() {
   });
 
   const currentRows = DATA.filter(function(row) {
-    return normalizeDeadline(row) !== "Archive";
+    return normalizeDeadline(row) !== "Archive" && normalizeDeadline(row) !== "Review pending";
   });
   const closingRows = DATA.filter(function(row) {
     return normalizeDeadline(row) === "Closing soon";
   });
   const archiveRows = DATA.filter(function(row) {
     return normalizeDeadline(row) === "Archive";
+  });
+  const reviewRows = DATA.filter(function(row) {
+    return normalizeDeadline(row) === "Review pending";
   });
 
   const totalNode = document.getElementById("totalCount");
@@ -2181,6 +2188,8 @@ function render() {
   if (openNode) openNode.textContent = String(currentRows.length);
   if (closingNode) closingNode.textContent = String(closingRows.length);
   if (archiveNode) archiveNode.textContent = String(archiveRows.length);
+  const reviewMetaNode = document.getElementById("resultMeta");
+  if (reviewMetaNode) reviewMetaNode.textContent = String(reviewRows.length) + " records pending editorial review (not counted as current). Use Status > Review pending to see them.";
 
   const rows = DATA.filter(function(row) {
     const deadlineGroup = normalizeDeadline(row);
@@ -2210,7 +2219,7 @@ function render() {
     const locationMatch = !locationValue || normalizeLocation(row) === locationValue;
     const deadlineMatch = deadlineValue
       ? deadlineGroup === deadlineValue
-      : deadlineGroup !== "Archive";
+      : deadlineGroup !== "Archive" && deadlineGroup !== "Review pending";
 
     return searchMatch && typeMatch && audienceMatch && locationMatch && deadlineMatch;
   });
